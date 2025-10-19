@@ -1,9 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mysql -u root -e \"USE mafia_game; SELECT userid, username, user_level, money, crystals FROM users WHERE username=''admin'';\")",
-      "Bash(php fix_php8_compatibility.php)",
-      "Bash(git add -A)"
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix codelock encoding issue by replacing encoded core.php\n\nProblem:\n- core.php and 6 other files were encoded with \"codelock\" system\n- Encoding system is broken/missing license key\n- Causes \"Undefined constant codelock\" fatal error on login\n\nSolution:\n- Backed up encoded core.php to core.php.encoded\n- Created new simplified/decoded core.php with essential functions:\n  * Database connection setup\n  * MySQLi driver loading\n  * Global functions loading\n- Added codelock_fix.php polyfill\n- Modified globals.php to include codelock fix\n\nFiles still encoded (non-critical):\n- footer.php, lfooter.php, license.php\n- smenu.php, staff.php, install.php\n\nDocumentation:\n- Added CODELOCK_ISSUE_FIX.txt with full explanation\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

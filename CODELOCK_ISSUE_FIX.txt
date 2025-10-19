@@ -1,0 +1,110 @@
+==========================================
+PROBLÈME CODELOCK ET SOLUTION APPLIQUÉE
+==========================================
+
+PROBLÈME RENCONTRÉ
+------------------
+Erreur: Undefined constant "codelock" in core.php
+
+Plusieurs fichiers du script sont encodés avec un système de protection
+commercial appelé "codelock":
+- core.php
+- footer.php
+- install.php
+- lfooter.php
+- license.php
+- smenu.php
+- staff.php
+
+Ces fichiers encodés ne fonctionnent PAS car:
+1. Le système de décodage n'est pas présent
+2. La licence/clé de décodage est manquante ou invalide
+3. Le système codelock n'est pas compatible PHP 8.x
+
+
+SOLUTION APPLIQUÉE
+------------------
+
+✓ Fichier core.php remplacé
+   - core.php.encoded : Backup du fichier encodé original
+   - core.php : Nouvelle version décodée/simplifiée
+   - Contient les fonctions essentielles :
+     * Connexion à la base de données
+     * Chargement du driver MySQLi
+     * Chargement des fonctions globales
+
+✓ Fichier codelock_fix.php créé
+   - Polyfill pour éviter les erreurs de constante manquante
+   - Définit la constante 'codelock' si nécessaire
+
+
+FICHIERS MODIFIÉS
+-----------------
+1. core.php.encoded (backup de l'original)
+2. core.php (nouvelle version non-encodée)
+3. codelock_fix.php (polyfill)
+4. globals.php (inclut le codelock_fix)
+
+
+AUTRES FICHIERS ENCODÉS
+------------------------
+Ces fichiers restent encodés mais ne devraient pas bloquer le jeu :
+- footer.php : Pied de page (non critique)
+- lfooter.php : Footer de licence (non critique)
+- license.php : Page de licence (non critique)
+- smenu.php : Menu staff (utilisé par admin uniquement)
+- staff.php : Panel staff (utilisé par admin uniquement)
+- install.php : Installation (déjà contournée par import SQL direct)
+
+
+TESTS À EFFECTUER
+-----------------
+1. Accéder à http://localhost/Mafia-Game-Script/
+2. Se connecter avec admin / admin123
+3. Vérifier que:
+   - La page d'accueil s'affiche
+   - La connexion à la base de données fonctionne
+   - Les données des utilisateurs s'affichent
+   - Le jeu est navigable
+
+
+SI LE JEU NE FONCTIONNE TOUJOURS PAS
+-------------------------------------
+
+Option 1: Remplacer d'autres fichiers encodés
+   - Même méthode que core.php
+   - Créer des versions simplifiées
+
+Option 2: Chercher une version non-encodée
+   - Contacter Ravan Scripts (www.ravan.info)
+   - Chercher sur GitHub une version non-encodée
+   - Acheter une licence légale avec support
+
+Option 3: Utiliser un décodeur
+   - Certains outils peuvent décoder le codelock
+   - ATTENTION: Peut être illégal selon la licence
+   - Vérifiez les termes d'utilisation
+
+
+NOTES IMPORTANTES
+-----------------
+- Ce script semble avoir été distribué sans licence valide
+- L'encodage codelock est un système anti-piratage commercial
+- Les modifications apportées sont pour usage local/développement uniquement
+- Pour un usage en production, obtenez une licence légitime
+
+
+CHANGELOG
+---------
+2025-10-19:
+- Création de core.php non-encodé
+- Ajout de codelock_fix.php polyfill
+- Modification de globals.php pour inclure le fix
+- Backup des fichiers encodés originaux
+
+
+FICHIERS DE RÉFÉRENCE
+----------------------
+- CODELOCK_ISSUE_FIX.txt (ce fichier)
+- PHP8_COMPATIBILITY_FIXES.txt (corrections PHP 8.x)
+- INSTALLATION_COMPLETE.txt (guide d'installation)

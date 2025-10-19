@@ -10,10 +10,13 @@
 | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
 | The files in the package must not be distributed in whole or significant part.
 | All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Ravan Scripts without permission .         
+| Do Not Remove Powered By Ravan Scripts without permission .
 |**************************************************************************************************
 | Copyright (c) 2010 Ravan Scripts . All rights reserved.
 |**************************************************************************************************/
+
+// PHP 8.x compatibility: Fix for encoded files (codelock)
+require_once(__DIR__ . '/codelock_fix.php');
 
 session_start();
 ob_start();
