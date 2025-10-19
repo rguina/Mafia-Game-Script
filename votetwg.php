@@ -16,7 +16,8 @@
 |**************************************************************************************************/
 
 session_start();
-if(get_magic_quotes_gpc() == 0)
+// PHP 8.x compatibility fix
+if(!function_exists('get_magic_quotes_gpc') || get_magic_quotes_gpc() == 0)
 {
 foreach($_POST as $k => $v)
 {

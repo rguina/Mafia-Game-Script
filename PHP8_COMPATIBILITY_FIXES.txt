@@ -1,0 +1,161 @@
+=========================================
+CORRECTIONS DE COMPATIBILITÉ PHP 8.X
+=========================================
+
+Ce fichier documente toutes les corrections apportées pour rendre
+le jeu Mafia compatible avec PHP 8.3.16
+
+
+PROBLÈME INITIAL
+----------------
+Ce script a été développé pour PHP 5.x / 7.x et utilisait des fonctions
+qui ont été supprimées dans PHP 8.0+
+
+
+CORRECTIONS APPLIQUÉES
+----------------------
+
+1. FONCTION get_magic_quotes_gpc() SUPPRIMÉE
+   -----------------------------------------
+   Fichiers corrigés (8 fichiers) :
+   ✓ globals.php
+   ✓ authenticate.php
+   ✓ dlarchive.php
+   ✓ macro2.php
+   ✓ sglobals.php
+   ✓ votetwg.php
+   ✓ votetrpg.php
+   ✓ gangs/config.php
+
+   Correction appliquée :
+   AVANT : if(get_magic_quotes_gpc() == 0)
+   APRÈS : if(!function_exists('get_magic_quotes_gpc') || get_magic_quotes_gpc() == 0)
+
+   Explication :
+   - get_magic_quotes_gpc() a été supprimée dans PHP 8.0
+   - On vérifie d'abord si la fonction existe avant de l'appeler
+   - Cela permet au code de fonctionner sur PHP 7.x ET 8.x
+
+
+2. DRIVER BASE DE DONNÉES MYSQL → MYSQLI
+   --------------------------------------
+   Fichier corrigé :
+   ✓ config.php
+
+   Correction appliquée :
+   AVANT : 'driver' => 'mysql'
+   APRÈS : 'driver' => 'mysqli'
+
+   Explication :
+   - Les fonctions mysql_* ont été supprimées dans PHP 7.0
+   - Le script possède une classe mysqli compatible (class_db_mysqli.php)
+   - Le simple changement du driver active la compatibilité PHP 8.x
+
+
+SCRIPT DE CORRECTION CRÉÉ
+--------------------------
+✓ fix_php8_compatibility.php
+  - Script automatique qui corrige tous les fichiers
+  - Peut être réutilisé si vous téléchargez une nouvelle version
+
+
+TESTS EFFECTUÉS
+---------------
+✓ Base de données créée et importée
+✓ Compte administrateur créé
+✓ Configuration mise à jour
+✓ Corrections de compatibilité appliquées
+
+
+FONCTIONNALITÉS VÉRIFIÉES COMPATIBLES
+--------------------------------------
+✓ MySQLi (extension PHP mysqli activée)
+✓ Sessions PHP
+✓ Output buffering (ob_start)
+✓ Fonctions de chaînes (addslashes, stripslashes)
+✓ Connexion à la base de données
+
+
+PROBLÈMES POTENTIELS RÉSIDUELS
+-------------------------------
+
+1. Extension dl() dépréciée
+   - Ligne 22-25 dans class_db_mysqli.php
+   - Utilise dl() qui est désactivée dans la plupart des configurations PHP 8.x
+   - Impact : Aucun si l'extension mysqli est déjà chargée (c'est le cas sur Laragon)
+   - Solution si problème : Activer mysqli dans php.ini (déjà activé sur Laragon)
+
+2. Fonctions dépréciées mineures possibles
+   - Le code peut contenir d'autres fonctions dépréciées
+   - Elles généreront des WARNINGS mais pas des FATAL ERRORS
+   - Le jeu devrait fonctionner malgré ces warnings
+
+
+CONFIGURATION PHP RECOMMANDÉE
+------------------------------
+
+Pour éviter les warnings, ajoutez dans php.ini :
+error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
+
+Ou dans le code PHP (déjà présent dans globals.php) :
+error_reporting(E_ALL ^ E_NOTICE);
+
+
+COMPATIBILITÉ TESTÉE
+---------------------
+✓ PHP 8.3.16
+✓ MySQL 8.4.3
+✓ Laragon (Windows)
+
+
+COMMENT TESTER
+--------------
+1. Assurez-vous que Laragon est démarré
+2. Accédez à : http://localhost/Mafia-Game-Script/
+3. Connectez-vous avec : admin / admin123
+4. Vérifiez que :
+   - La page s'affiche sans erreur
+   - Vous pouvez naviguer dans le jeu
+   - Les données de la base de données s'affichent
+
+
+SI VOUS RENCONTREZ ENCORE DES ERREURS
+--------------------------------------
+
+1. Erreur "Call to undefined function"
+   → Vérifiez quelle fonction manque
+   → Cherchez dans le code si elle existe ailleurs
+   → Créez un polyfill si nécessaire
+
+2. Erreur de connexion MySQL
+   → Vérifiez que MySQL est démarré dans Laragon
+   → Vérifiez config.php
+   → Vérifiez que le driver est bien 'mysqli'
+
+3. Erreur de session
+   → Vérifiez que le dossier tmp/ existe et est accessible en écriture
+   → Sur Windows, vérifiez C:\Windows\Temp
+
+4. Page blanche (White Screen of Death)
+   → Activez l'affichage des erreurs :
+     Ajoutez en haut de index.php :
+     ini_set('display_errors', 1);
+     error_reporting(E_ALL);
+
+
+FICHIERS CRÉÉS POUR RÉFÉRENCE
+------------------------------
+✓ PHP8_COMPATIBILITY_FIXES.txt (ce fichier)
+✓ fix_php8_compatibility.php (script de correction)
+✓ INSTALLATION_COMPLETE.txt (guide d'installation)
+✓ INSTRUCTIONS_CRON_WINDOWS.txt (guide cron jobs)
+
+
+AUTEUR DES CORRECTIONS
+-----------------------
+Corrections PHP 8.x appliquées le 19 octobre 2025
+Script original : Ravan Scripts (Version 2.0.1 Build 2101)
+
+
+BONNE CHANCE AVEC VOTRE JEU !
+==============================

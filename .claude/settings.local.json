@@ -1,10 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(php -v)",
-      "Bash(mysql --version)",
-      "Bash(mysql -u root -e \"CREATE DATABASE IF NOT EXISTS mafia_game CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;\")",
-      "Bash(mysql -u root -e \"SHOW DATABASES LIKE ''mafia_game'';\")"
+      "Bash(mysql -u root -e \"USE mafia_game; SELECT userid, username, user_level, money, crystals FROM users WHERE username=''admin'';\")",
+      "Bash(php fix_php8_compatibility.php)",
+      "Bash(git add -A)"
     ],
     "deny": [],
     "ask": []

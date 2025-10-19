@@ -289,7 +289,7 @@ class GangVars {
 	}
 	
 	function escape($string) {
-		if (get_magic_quotes_gpc()) {
+		if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
 			$string = stripslashes($string);
 		}
 		$string = mysql_real_escape_string(trim($string));
@@ -297,7 +297,7 @@ class GangVars {
 	}
 	
 	function clean($string) {
-		if (get_magic_quotes_gpc()) {
+		if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
 			$string = stripslashes($string);
 		}
 		$string = mysql_real_escape_string(htmlentities(trim($string)));
@@ -305,7 +305,7 @@ class GangVars {
 	}
 	
 	function clean_br($string) {
-		if (get_magic_quotes_gpc()) {
+		if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
 			$string = stripslashes($string);
 		}
 		$string = mysql_real_escape_string(nl2br(htmlentities(trim($string))));

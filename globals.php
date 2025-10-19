@@ -17,7 +17,9 @@
 
 session_start();
 ob_start();
-if(get_magic_quotes_gpc() == 0)
+// PHP 8.x compatibility: get_magic_quotes_gpc() was removed in PHP 8.0
+// Magic quotes are always off in PHP 8.x, so we always apply addslashes
+if(!function_exists('get_magic_quotes_gpc') || get_magic_quotes_gpc() == 0)
 {
   foreach($_POST as $k => $v)
   {

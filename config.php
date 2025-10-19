@@ -5,6 +5,6 @@ $_CONFIG = array(
 'password' => '',
 'database' => 'mafia_game',
 'persistent' => 0,
-'driver' => 'mysql',
+'driver' => 'mysqli', // Changed to mysqli for PHP 8.x compatibility
 );
 ?>
