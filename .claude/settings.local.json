@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -v)",
+      "Bash(mysql --version)",
+      "Bash(mysql -u root -e \"CREATE DATABASE IF NOT EXISTS mafia_game CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;\")",
+      "Bash(mysql -u root -e \"SHOW DATABASES LIKE ''mafia_game'';\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

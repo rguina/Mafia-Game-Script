@@ -1,0 +1,90 @@
+===========================================
+CONFIGURATION DES CRON JOBS POUR WINDOWS
+===========================================
+
+Les fichiers batch ont été créés pour vous. Maintenant, suivez ces étapes pour configurer le Planificateur de tâches Windows :
+
+ÉTAPE 1 : Ouvrir le Planificateur de tâches
+---------------------------------------------
+1. Appuyez sur Windows + R
+2. Tapez : taskschd.msc
+3. Appuyez sur Entrée
+
+
+ÉTAPE 2 : Créer les tâches planifiées
+--------------------------------------
+
+TÂCHE 1 - Cron Minute (Jail & Hospital - chaque minute)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Cliquez sur "Créer une tâche..." dans le panneau de droite
+2. Onglet Général :
+   - Nom : Mafia Game - Cron Minute
+   - Cochez "Exécuter même si l'utilisateur n'est pas connecté"
+3. Onglet Déclencheurs -> Nouveau :
+   - Lancer la tâche : Selon une planification
+   - Paramètres : Quotidien
+   - Répéter la tâche toutes les : 1 minute
+   - Pendant : Indéfiniment
+4. Onglet Actions -> Nouveau :
+   - Action : Démarrer un programme
+   - Programme : C:\laragon\www\Mafia-Game-Script\run_cron_minute.bat
+5. Onglet Conditions :
+   - DÉCOCHEZ "Démarrer la tâche uniquement si l'ordinateur est relié au secteur"
+6. Cliquez sur OK
+
+
+TÂCHE 2 - Cron Five Minutes (Energy & Health refill - chaque 5 minutes)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Répétez les mêmes étapes que TÂCHE 1, mais :
+   - Nom : Mafia Game - Cron Five Minutes
+   - Répéter la tâche toutes les : 5 minutes
+   - Programme : C:\laragon\www\Mafia-Game-Script\run_cron_five.bat
+
+
+TÂCHE 3 - Cron Hour (chaque heure)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Répétez les mêmes étapes que TÂCHE 1, mais :
+   - Nom : Mafia Game - Cron Hour
+   - Répéter la tâche toutes les : 1 heure
+   - Programme : C:\laragon\www\Mafia-Game-Script\run_cron_hour.bat
+
+
+TÂCHE 4 - Cron Day (chaque jour)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Répétez les mêmes étapes que TÂCHE 1, mais :
+   - Nom : Mafia Game - Cron Day
+   - Paramètres : Quotidien (PAS de répétition)
+   - Démarrer : 00:00:00 (minuit)
+   - Programme : C:\laragon\www\Mafia-Game-Script\run_cron_day.bat
+
+
+OPTION ALTERNATIVE : Utiliser PHP CLI (plus performant)
+=========================================================
+Si vous préférez utiliser PHP directement plutôt que curl :
+
+Modifiez les fichiers .bat pour utiliser cette commande :
+C:\laragon\bin\php\php-8.3.16-Win32-vs16-x64\php.exe -f C:\laragon\www\Mafia-Game-Script\cron_run_minute.php
+
+(Ajustez le chemin de PHP selon votre version dans Laragon)
+
+
+VÉRIFICATION
+============
+1. Dans le Planificateur de tâches, cliquez droit sur une tâche
+2. Sélectionnez "Exécuter"
+3. Vérifiez que le jeu fonctionne correctement
+
+
+IMPORTANT
+=========
+- Assurez-vous que Laragon (Apache/MySQL) est démarré
+- Les tâches ne s'exécuteront que si Laragon est actif
+- Pour un serveur de production, utilisez un vrai serveur Linux avec des vrais cron jobs
+
+
+NOTES SUR LES CRON JOBS
+=======================
+- cron_run_minute.php  : Prison et Hôpital (chaque minute)
+- cron_run_five.php    : Énergie, Santé, Stats (chaque 5 minutes)
+- cron_run_hour.php    : Tâches horaires (chaque heure)
+- cron_run_day.php     : Tâches quotidiennes (minuit chaque jour)

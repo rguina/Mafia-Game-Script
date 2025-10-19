@@ -1,9 +1,9 @@
 <?php
 $_CONFIG = array(
-'hostname' => '',
-'username' => '',
+'hostname' => 'localhost',
+'username' => 'root',
 'password' => '',
-'database' => '',
+'database' => 'mafia_game',
 'persistent' => 0,
 'driver' => 'mysql',
 );
