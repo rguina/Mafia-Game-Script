@@ -15,7 +15,10 @@
 | Copyright (c) 2010 Ravan Scripts . All rights reserved.
 |**************************************************************************************************/
 
-session_start();
+// PHP 8.x: Check if session is already started before calling session_start()
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $forums=1;
 class bbcode {
 var $engine="";

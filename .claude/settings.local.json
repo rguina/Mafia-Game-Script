@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git commit -m \"$(cat <<''EOF''\nFix MONO_ON warning and improve eregi() regex escaping\n\nChanges:\n- Added MONO_ON check in header.php\n  * Prevents \"Constant already defined\" warning\n  * Uses if (!defined(''MONO_ON'')) before define()\n\n- Improved eregi() polyfills with proper regex escaping\n  * Escape forward slashes in patterns\n  * Fixes \"Unknown modifier\" errors in preg_match()\n  * Applied to all 4 functions: eregi, ereg, ereg_replace, eregi_replace\n  * Updated in both globals.php and core.php\n\nFixes:\n- Warning: Constant MONO_ON already defined (header.php:22)\n- Warning: preg_match(): Unknown modifier (header.php:55)\n\nThe game should now load without any warnings!\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(mysql -u root -e \"USE mafia_game; SELECT userid, username, email FROM users WHERE username=''admin'';\")",
+      "Bash(mysql -u root -e \"USE mafia_game; UPDATE users SET email=''admin@localhost.com'' WHERE username=''admin'';\")",
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix user data loading and duplicate session_start\n\nChanges:\n- Fixed \"account may be broken\" error\n  * Added missing email to admin user in database\n  * Users table email field was empty for admin\n  * Updated: admin email = admin@localhost.com\n\n- Fixed duplicate session_start() in forums.php\n  * Added session_status() check before session_start()\n  * Prevents \"session already active\" notice\n  * Compatible with globals.php that also starts session\n\nDatabase fixes:\n- UPDATE users SET email=''admin@localhost.com'' WHERE username=''admin''\n\nFixes:\n- Error: \"Your account may be broken\" (header.php:221)\n- Notice: session_start() already active (forums.php:18)\n\nThe game should now fully load with user data!\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
