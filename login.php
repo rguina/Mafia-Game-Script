@@ -235,8 +235,7 @@ die("<b><font color=red size=+1>$ipban</font></b></body></html>");
 }
 $year=date('Y');
 
-OUT;
-
+// OUT; // Removed - undefined heredoc marker
 
 include "lfooter.php";
 
