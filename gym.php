@@ -48,8 +48,12 @@ if(isset($_POST['stat']) && isset($_POST['amnt']) && $_POST['stat'] && $_POST['a
     if($ir['jail']) { $gain/=2; }
     $db->query("UPDATE `userstats` SET `{$stat}` = `{$stat}` + $gain WHERE `userid` = $userid");
     $db->query("UPDATE `users` SET `will` = {$ir['will']}, energy = energy - {$_POST['amnt']} WHERE `userid` = $userid");
-    $inc=$ir[$stat]+$gain;
-    $inc2=$ir['energy']-$_POST['amnt'];
+
+    // Round values for display
+    $gain = round($gain, 4);
+    $inc = round($ir[$stat]+$gain, 4);
+    $inc2 = $ir['energy']-$_POST['amnt'];
+
     if($stat=="strength")
     {
       print "
@@ -100,10 +104,18 @@ if(isset($_POST['stat']) && isset($_POST['amnt']) && $_POST['stat'] && $_POST['a
     $ir[$stat]+=$gain;
   }
 }
+
+// Calculate ranks AFTER training (moved from before to get updated ranks)
 $ir['strank']=get_rank($ir['strength'],'strength');
 $ir['agirank']=get_rank($ir['agility'],'agility');
 $ir['guarank']=get_rank($ir['guard'],'guard');
 $ir['labrank']=get_rank($ir['labour'],'labour');
+
+// Round stat values for display (4 decimals to match database precision)
+$ir['strength'] = round($ir['strength'], 4);
+$ir['agility'] = round($ir['agility'], 4);
+$ir['guard'] = round($ir['guard'], 4);
+$ir['labour'] = round($ir['labour'], 4);
 
 
 if(  $ir['energy'] == "0"   )
