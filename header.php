@@ -16,10 +16,10 @@
 |**************************************************************************************************/
 
 class headers {
-function startheaders() {  
+function startheaders() {
 global $ir, $set;
 global $_CONFIG;
-define("MONO_ON", 1);
+if (!defined('MONO_ON')) { define("MONO_ON", 1); }
 $db=new database;
 $db->configure($_CONFIG['hostname'],
 $_CONFIG['username'],

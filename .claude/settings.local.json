@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git commit -m \"$(cat <<''EOF''\nAdd ereg/eregi polyfills and fix login.php undefined constant\n\nChanges:\n- Added ereg() family polyfills in core.php for PHP 8.x\n  * eregi() -> preg_match() with ''i'' flag\n  * ereg() -> preg_match()\n  * ereg_replace() -> preg_replace()\n  * eregi_replace() -> preg_replace() with ''i'' flag\n\n- Fixed login.php undefined constant OUT\n  * Commented out orphaned OUT; heredoc marker (line 238)\n  * No matching opening <<<OUT found in the file\n\nFixes:\n- Fatal error: Call to undefined function eregi() (header.php:55)\n- Fatal error: Undefined constant \"OUT\" (login.php:238)\n\nThese functions were removed in PHP 7.0 and need polyfills for\ncompatibility with PHP 8.x.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix MONO_ON warning and improve eregi() regex escaping\n\nChanges:\n- Added MONO_ON check in header.php\n  * Prevents \"Constant already defined\" warning\n  * Uses if (!defined(''MONO_ON'')) before define()\n\n- Improved eregi() polyfills with proper regex escaping\n  * Escape forward slashes in patterns\n  * Fixes \"Unknown modifier\" errors in preg_match()\n  * Applied to all 4 functions: eregi, ereg, ereg_replace, eregi_replace\n  * Updated in both globals.php and core.php\n\nFixes:\n- Warning: Constant MONO_ON already defined (header.php:22)\n- Warning: preg_match(): Unknown modifier (header.php:55)\n\nThe game should now load without any warnings!\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

@@ -64,24 +64,28 @@ if (!function_exists('mysql_escape_string')) {
 // PHP 8.x: eregi() was removed in PHP 7.0, replaced by preg_match() with 'i' flag
 if (!function_exists('eregi')) {
     function eregi($pattern, $string) {
+        $pattern = str_replace('/', '\/', $pattern);
         return preg_match('/' . $pattern . '/i', $string);
     }
 }
 
 if (!function_exists('ereg')) {
     function ereg($pattern, $string) {
+        $pattern = str_replace('/', '\/', $pattern);
         return preg_match('/' . $pattern . '/', $string);
     }
 }
 
 if (!function_exists('ereg_replace')) {
     function ereg_replace($pattern, $replacement, $string) {
+        $pattern = str_replace('/', '\/', $pattern);
         return preg_replace('/' . $pattern . '/', $replacement, $string);
     }
 }
 
 if (!function_exists('eregi_replace')) {
     function eregi_replace($pattern, $replacement, $string) {
+        $pattern = str_replace('/', '\/', $pattern);
         return preg_replace('/' . $pattern . '/i', $replacement, $string);
     }
 }
