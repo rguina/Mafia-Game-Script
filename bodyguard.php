@@ -1,7 +1,7 @@
 <?php
 include "globals.php";
 if($ir['jail'] or $ir['hospital']) { die("This page cannot be accessed while in jail or hospital."); }
-if(!$_GET['spend'])
+if(!isset($_GET['spend']) || !$_GET['spend'])
 {
 print "
 

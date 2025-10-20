@@ -85,7 +85,7 @@ print "News Paper Ad ID {$_GET['npID']} deleted!
 }
 }
 }
-if($_GET['action'] == "add")
+if(isset($_GET['action']) && $_GET['action'] == "add")
 {
 print "<h3>Add Advertisement ($10,000)</h3>
 <form action='newspaper.php?action=added' method='post'>
@@ -96,7 +96,7 @@ Ad Body: <br><textarea rows=14 cols=65 name='npBODY' class='textbox'></textarea>
 <font color=red><b>WARNING:</b> Only plain text will work<br>Do not advertise other games<br>Follow the rules.";
 }
 
-if($_GET['action'] == "added")
+if(isset($_GET['action']) && $_GET['action'] == "added")
 {
 if($ir['money']>9999)
 {

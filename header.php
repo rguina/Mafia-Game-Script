@@ -220,7 +220,7 @@ if(!$ir['email'])
 global $domain;
 die ("<body>Your account may be broken. Please mail help@{$domain} stating your username and player ID.");
 }
-if($dosessh && ($_SESSION['attacking'] || $ir['attacking']))
+if($dosessh && (isset($_SESSION['attacking']) && $_SESSION['attacking'] || isset($ir['attacking']) && $ir['attacking']))
 {
 print "<CENTER><P><b><font color=red>You lost all your EXP for running from the fight.</font></b></P></CENTER> <br/><br/>";
 $db->query("UPDATE users SET exp=0,attacking=0 WHERE userid=$userid");

@@ -17,6 +17,8 @@
 include "globals.php";
 $q=$db->query("SELECT * FROM items WHERE itmid IN({$ir['equip_primary']}, {$ir['equip_secondary']}, {$ir['equip_armor']})");
 
+// Initialize $equip array to prevent undefined variable warnings
+$equip = array();
 
 print '
 
@@ -49,7 +51,7 @@ print '
 
 
 ';
-if($equip[$ir['equip_primary']]['itmid'])
+if(isset($equip[$ir['equip_primary']]) && isset($equip[$ir['equip_primary']]['itmid']))
 {
 print $equip[$ir['equip_primary']]['itmname']."</td><td><a href='unequip.php?type=equip_primary'>Unequip Item</a></td>";
 }
@@ -61,7 +63,7 @@ print "</tr>
 <tr>
 <th>Secondary Weapon</th>
 <td>";
-if($equip[$ir['equip_secondary']]['itmid'])
+if(isset($equip[$ir['equip_secondary']]) && isset($equip[$ir['equip_secondary']]['itmid']))
 {
 print $equip[$ir['equip_secondary']]['itmname']."</td><td><a href='unequip.php?type=equip_secondary'>Unequip Item</a></td>";
 }
@@ -73,7 +75,7 @@ print "</tr>
 <tr>
 <th>Armor</th>
 <td>";
-if($equip[$ir['equip_armor']]['itmid'])
+if(isset($equip[$ir['equip_armor']]) && isset($equip[$ir['equip_armor']]['itmid']))
 {
 print $equip[$ir['equip_armor']]['itmname']."</td><td><a href='unequip.php?type=equip_armor'>Unequip Item</a></td>";
 }

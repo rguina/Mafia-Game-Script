@@ -1,17 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add TEST_RESULTS_FINAL.md)",
-      "Bash(git commit -m \"Add final test results documentation\n\n- Created comprehensive test results report\n- Documents all 11+ tested and working pages\n- Lists all applied fixes and polyfills\n- Provides before/after comparison\n- Includes test scripts usage guide\n- Final status: Game is fully functional on PHP 8.3.16\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
-      "Bash(php test_single_page.php login.php)",
-      "Bash(php test_single_page.php inventory.php)",
-      "Bash(git add README_TESTS.md)",
-      "Bash(git commit -m \"Add quick test summary README\n\nQuick reference guide for test results and game access\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
-      "Bash(git add css/stylenew.css)",
-      "Bash(git commit -m \"Fix signup form input visibility - CSS color fix\n\nProblem:\n- Input fields and select boxes on signup page not visible\n- Black text on black background (#111)\n- Users couldn''t see what they were typing\n\nSolution:\n- Added color:#ffffff; to .reg_namebox input (line 2850)\n- Changed select default color from #5b5b5b to #ffffff (line 32)\n- Changed textarea default color from #5b5b5b to #ffffff (line 37)\n\nAffected elements:\n- Username input field\n- Password input fields\n- Email input field\n- Gender select dropdown\n- Promo code input\n- Captcha input\n\nNow all form fields are visible with white text on dark background\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
-      "Bash(php test_single_page.php signup.php)",
-      "Bash(git add CSS_FIX_SIGNUP.md)",
-      "Bash(git commit -m \"Add CSS fix documentation for signup form\n\nDocumentation of signup form visibility issue and solution\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")"
+      "Bash(for page in index.php inventory.php newspaper.php bodyguard.php)",
+      "Bash(php test_single_page.php newspaper.php)"
     ],
     "deny": [],
     "ask": []
