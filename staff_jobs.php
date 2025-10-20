@@ -21,6 +21,9 @@ if($ir['user_level'] > 2)
 die("403");
 }
 //This contains shop stuffs
+// Initialize $_GET['action'] to avoid undefined key warning
+$_GET['action'] = isset($_GET['action']) ? $_GET['action'] : '';
+
 switch($_GET['action'])
 {
 case 'newjob': newjob(); break;
@@ -29,6 +32,8 @@ case 'newjobrank': newjobrank(); break;
 case 'jobrankedit': jobrankedit(); break;
 case 'jobdele': jobdele(); break;
 case 'jobrankdele': jobrankdele(); break;
+case 'managejobs': managejobs(); break;
+case 'togglejob': togglejob(); break;
 default: print "Error: This script requires an action."; break;
 }
 function newjob()

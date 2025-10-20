@@ -16,6 +16,9 @@
 |**************************************************************************************************/
 
 session_start();
+// PHP 8.x compatibility - Load polyfills first
+require_once "core.php";
+
 // PHP 8.x compatibility fix
 if(!function_exists('get_magic_quotes_gpc') || get_magic_quotes_gpc() == 0)
 {
