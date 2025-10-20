@@ -18,6 +18,28 @@
 // PHP 8.x compatibility: Fix for encoded files (codelock)
 require_once(__DIR__ . '/codelock_fix.php');
 
+// PHP 8.x: eregi() was removed in PHP 7.0, add polyfills BEFORE header.php
+if (!function_exists('eregi')) {
+    function eregi($pattern, $string) {
+        return preg_match('/' . $pattern . '/i', $string);
+    }
+}
+if (!function_exists('ereg')) {
+    function ereg($pattern, $string) {
+        return preg_match('/' . $pattern . '/', $string);
+    }
+}
+if (!function_exists('ereg_replace')) {
+    function ereg_replace($pattern, $replacement, $string) {
+        return preg_replace('/' . $pattern . '/', $replacement, $string);
+    }
+}
+if (!function_exists('eregi_replace')) {
+    function eregi_replace($pattern, $replacement, $string) {
+        return preg_replace('/' . $pattern . '/i', $replacement, $string);
+    }
+}
+
 session_start();
 ob_start();
 // PHP 8.x compatibility: get_magic_quotes_gpc() was removed in PHP 8.0
@@ -69,7 +91,7 @@ require "header.php";
 include "config.php";
 include "language.php";
 global $_CONFIG;
-define("MONO_ON", 1);
+if (!defined('MONO_ON')) { define("MONO_ON", 1); }
 require "class/class_db_{$_CONFIG['driver']}.php";
 $db=new database;
 $db->configure($_CONFIG['hostname'],
@@ -79,6 +101,23 @@ $db->configure($_CONFIG['hostname'],
  $_CONFIG['persistent']);
 $db->connect();
 $c=$db->connection_id;
+
+// PHP 8.x: mysql_* polyfills
+if (!function_exists('mysql_real_escape_string')) {
+    function mysql_real_escape_string($string) {
+        global $db;
+        if (isset($db) && isset($db->connection_id)) {
+            return mysqli_real_escape_string($db->connection_id, $string);
+        }
+        return addslashes($string);
+    }
+}
+if (!function_exists('mysql_escape_string')) {
+    function mysql_escape_string($string) {
+        return mysql_real_escape_string($string);
+    }
+}
+
 $set=array();
 $settq=$db->query("SELECT * FROM settings");
 while($r=$db->fetch_row($settq))
