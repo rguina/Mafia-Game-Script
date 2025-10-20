@@ -61,6 +61,69 @@ if (!function_exists('mysql_escape_string')) {
     }
 }
 
+// PHP 8.x: Additional mysql_* compatibility functions
+if (!function_exists('mysql_num_rows')) {
+    function mysql_num_rows($result) {
+        if ($result instanceof mysqli_result) {
+            return mysqli_num_rows($result);
+        }
+        return 0;
+    }
+}
+
+if (!function_exists('mysql_fetch_assoc')) {
+    function mysql_fetch_assoc($result) {
+        if ($result instanceof mysqli_result) {
+            return mysqli_fetch_assoc($result);
+        }
+        return false;
+    }
+}
+
+if (!function_exists('mysql_insert_id')) {
+    function mysql_insert_id($link = null) {
+        global $db;
+        if ($link !== null && $link instanceof mysqli) {
+            return mysqli_insert_id($link);
+        }
+        if (isset($db) && isset($db->connection_id)) {
+            return mysqli_insert_id($db->connection_id);
+        }
+        return 0;
+    }
+}
+
+if (!function_exists('mysql_query')) {
+    function mysql_query($query, $link = null) {
+        global $db;
+        if ($link !== null && $link instanceof mysqli) {
+            return mysqli_query($link, $query);
+        }
+        if (isset($db) && isset($db->connection_id)) {
+            return mysqli_query($db->connection_id, $query);
+        }
+        return false;
+    }
+}
+
+if (!function_exists('mysql_fetch_array')) {
+    function mysql_fetch_array($result, $result_type = MYSQLI_BOTH) {
+        if ($result instanceof mysqli_result) {
+            return mysqli_fetch_array($result, $result_type);
+        }
+        return false;
+    }
+}
+
+if (!function_exists('mysql_free_result')) {
+    function mysql_free_result($result) {
+        if ($result instanceof mysqli_result) {
+            return mysqli_free_result($result);
+        }
+        return false;
+    }
+}
+
 // PHP 8.x: eregi() was removed in PHP 7.0, replaced by preg_match() with 'i' flag
 if (!function_exists('eregi')) {
     function eregi($pattern, $string) {
