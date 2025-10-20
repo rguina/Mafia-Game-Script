@@ -2850,6 +2850,20 @@ padding:3px 0px 0px 6px;
 color:#ffffff;
 }
 
+.reg_namebox input::placeholder{
+color:#888888;
+opacity:1;
+}
+
+.reg_namebox input::-webkit-input-placeholder{
+color:#888888;
+}
+
+.reg_namebox input::-moz-placeholder{
+color:#888888;
+opacity:1;
+}
+
 .agreepart{
 clear:both;
 width:660px;

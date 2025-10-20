@@ -15,7 +15,9 @@
 | Copyright (c) 2010 Ravan Scripts . All rights reserved.
 |**************************************************************************************************/
 
-require "core.php"; 
+require "core.php";
+require "language.php";
+
 function valid_email($email) {
   // First, we check that there's one @ symbol, and that the lengths are right
   if (!ereg("^[^@]{1,64}@[^@]{1,255}$", $email)) {
@@ -432,20 +434,20 @@ print "
 <table width='100%' class='table' cellspacing='1'>
 <tr>
 <td width='25%'>$ruser</td>
-<td width='25%'> <div class='reg_namebox'> <input type=text name=username onkeyup='CheckUsername(this.value);'></td> </div> </div>
+<td width='25%'> <div class='reg_namebox'> <input type=text name=username placeholder='Enter username' onkeyup='CheckUsername(this.value);'></td> </div> </div>
 <td width='50%'><div id='usernameresult'></div></td>
 </tr>
 <tr>
 <td>$rpass</td>
-<td><div class='reg_namebox'><input type=password id='pw1' name=password onkeyup='CheckPasswords(this.value);PasswordMatch();'></td> </div>
+<td><div class='reg_namebox'><input type=password id='pw1' name=password placeholder='Enter password' onkeyup='CheckPasswords(this.value);PasswordMatch();'></td> </div>
 <td><div id='passwordresult'></div></td>
 </tr>
 <tr>
-<td>$rcpass</td><td><div class='reg_namebox'><input type=password name=cpassword id='pw2' onkeyup='PasswordMatch();'></td> </div>
+<td>$rcpass</td><td><div class='reg_namebox'><input type=password name=cpassword id='pw2' placeholder='Confirm password' onkeyup='PasswordMatch();'></td> </div>
 <td><div id='cpasswordresult'></div></td>
 </tr>
 <tr>
-<td>$remail</td><td> <div class='reg_namebox'> <input type=text name=email onkeyup='CheckEmail(this.value);'></td> </div>
+<td>$remail</td><td> <div class='reg_namebox'> <input type=text name=email placeholder='your@email.com' onkeyup='CheckEmail(this.value);'></td> </div>
 <td><div id='emailresult'></div></td>
 </tr>
 <tr>
@@ -455,7 +457,7 @@ print "
 <option value='Female'>$rfem</option></select></td></div>
 </tr>
 <tr>
-<td>$rpromo</td><td colspan=2><div class='reg_namebox'><input type=text value='$rnocode' name=promo></td> </div>
+<td>$rpromo</td><td colspan=2><div class='reg_namebox'><input type=text value='$rnocode' name=promo placeholder='Promo code (optional)'></td> </div>
 </tr>
 
 <input type=hidden name=ref value='";
@@ -466,7 +468,7 @@ if($set['regcap_on'])
 {
 print " <tr>
 <td colspan=2><img src='captcha_verify.php?bgcolor=C3C3C3' width='170' height='88'/><br /></td>
-<td><b>Enter Captcha Code</b></td><td colspan=2><div class='reg_namebox'><input type='text'  name='captcha' /></td>
+<td><b>Enter Captcha Code</b></td><td colspan=2><div class='reg_namebox'><input type='text'  name='captcha' placeholder='Enter code from image' /></td>
 </tr> ";
 }
 print "
