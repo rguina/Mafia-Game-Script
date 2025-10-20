@@ -44,6 +44,34 @@ if (file_exists('global_func.php')) {
     require_once('global_func.php');
 }
 
+// PHP 8.x: Créer des fonctions de compatibilité pour les anciennes fonctions mysql_*
+if (!function_exists('mysql_real_escape_string')) {
+    function mysql_real_escape_string($string) {
+        global $db;
+        if (isset($db) && isset($db->connection_id)) {
+            return mysqli_real_escape_string($db->connection_id, $string);
+        }
+        return addslashes($string);
+    }
+}
+
+if (!function_exists('mysql_escape_string')) {
+    function mysql_escape_string($string) {
+        return mysql_real_escape_string($string);
+    }
+}
+
+// Charger les settings depuis la base de données
+$set = array();
+if (isset($db) && $db->connection_id) {
+    $settings_query = $db->query("SELECT * FROM settings");
+    if ($settings_query) {
+        while ($row = $db->fetch_row($settings_query)) {
+            $set[$row['conf_name']] = $row['conf_value'];
+        }
+    }
+}
+
 // Définir des constantes utiles
 if (!defined('MONO_ON')) { define('MONO_ON', 1); }
 ?>
