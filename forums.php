@@ -15,10 +15,7 @@
 | Copyright (c) 2010 Ravan Scripts . All rights reserved.
 |**************************************************************************************************/
 
-// PHP 8.x: Check if session is already started before calling session_start()
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Session will be started by globals.php (no need to start it here)
 $forums=1;
 class bbcode {
 var $engine="";
@@ -108,16 +105,16 @@ You have been forum banned for {$ir['forumban']} days.<br />
 <br />
 <b>Reason: {$ir['fb_reason']}</font></b>");
 }
-$_GET['viewforum']=(int) $_GET['viewforum'];
-if($_GET['viewtopic'] and $_GET['act'] != 'quote') { $_GET['act']='viewtopic'; }
+$_GET['viewforum'] = isset($_GET['viewforum']) ? (int) $_GET['viewforum'] : 0;
+if(isset($_GET['viewtopic']) && $_GET['viewtopic'] && (!isset($_GET['act']) || $_GET['act'] != 'quote')) { $_GET['act']='viewtopic'; }
 
-if($_GET['viewforum']) { $_GET['act']='viewforum'; }
-if($_GET['reply']) { $_GET['act']='reply'; }
-if($_GET['empty']==1 && $_GET['code']=='kill' && $_SESSION['owner'])
+if(isset($_GET['viewforum']) && $_GET['viewforum']) { $_GET['act']='viewforum'; }
+if(isset($_GET['reply']) && $_GET['reply']) { $_GET['act']='reply'; }
+if(isset($_GET['empty']) && $_GET['empty']==1 && isset($_GET['code']) && $_GET['code']=='kill' && isset($_SESSION['owner']) && $_SESSION['owner'])
 {
 emptyallforums();
 }
-switch($_GET['act'])
+switch(isset($_GET['act']) ? $_GET['act'] : '')
 {
 case 'viewforum':
 viewforum();
