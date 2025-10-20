@@ -7,7 +7,7 @@ $statnames=array(
 'Agility' => 'agility',
 'Guard' => 'guard',
 'Labour' => 'labour');
-$_POST['amnt']=abs((int) $_POST['amnt']);
+$_POST['amnt'] = isset($_POST['amnt']) ? abs((int) $_POST['amnt']) : 0;
 if(!$ir['jail'])
 {
 print "<div class='gympage'>
@@ -25,7 +25,7 @@ else
 }
 
 
-if($_POST['stat'] && $_POST['amnt'])
+if(isset($_POST['stat']) && isset($_POST['amnt']) && $_POST['stat'] && $_POST['amnt'])
 {
   $stat=$statnames[$_POST['stat']];
   if(!$stat)
