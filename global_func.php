@@ -389,6 +389,10 @@ function get_rank($stat, $mykey)
 {
 global $db;
 global $ir,$userid,$c;
+// Handle NULL stat values
+if ($stat === null || $stat === '') {
+    $stat = 0;
+}
 $q=$db->query("SELECT count(*) FROM userstats us LEFT JOIN users u ON us.userid=u.userid WHERE us.$mykey > $stat AND us.userid != $userid AND u.user_level != 0") ;
 return $db->fetch_single($q)+1;
 }
