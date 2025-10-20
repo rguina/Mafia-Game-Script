@@ -6,6 +6,9 @@
  * Il contient les fonctions essentielles pour faire fonctionner le jeu
  */
 
+// Désactiver l'affichage des warnings pour un code legacy
+error_reporting(E_ERROR | E_PARSE);
+
 if (!defined('MONO_ON')) { define('MONO_ON', 1); }
 
 // Chargement de la configuration

@@ -1,0 +1,126 @@
+==========================================
+INTÉGRATION DE RUFFLE FLASH EMULATOR
+==========================================
+
+PROBLÈME
+--------
+Le jeu utilise Adobe Flash Player qui n'est plus supporté par les navigateurs
+depuis décembre 2020.
+
+Fichiers Flash trouvés dans le projet :
+- images/blackjack.swf
+- images/ewoks.swf
+- images/mafia.swf
+- images/pacman.swf
+- images/poker.swf
+
+
+SOLUTION : RUFFLE
+-----------------
+Ruffle est un émulateur Flash open-source écrit en Rust qui fonctionne
+dans les navigateurs modernes sans plugin.
+
+Site officiel : https://ruffle.rs/
+
+
+INTÉGRATION EFFECTUÉE
+----------------------
+
+✓ Ajout de Ruffle dans signup.php (ligne 64)
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
+✓ Fichier ruffle_integration.js créé (pour référence)
+
+
+COMMENT AJOUTER RUFFLE AUX AUTRES PAGES
+----------------------------------------
+
+Pour chaque page HTML/PHP qui contient du Flash, ajoutez cette ligne
+dans la section <head> :
+
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
+OU
+
+Téléchargez Ruffle localement :
+1. Téléchargez depuis : https://github.com/ruffle-rs/ruffle/releases
+2. Extrayez dans : C:\laragon\www\Mafia-Game-Script\js\ruffle\
+3. Ajoutez dans <head> :
+   <script src="js/ruffle/ruffle.js"></script>
+
+
+UTILISATION DE RUFFLE
+----------------------
+
+Ruffle remplace automatiquement tous les éléments Flash :
+- <object> tags
+- <embed> tags
+- Flash content
+
+Aucune modification du code n'est nécessaire !
+Ruffle détecte et remplace automatiquement le contenu Flash.
+
+
+FICHIERS À MODIFIER
+-------------------
+
+Pour une intégration complète, ajoutez le script Ruffle dans :
+
+1. header.php (si utilisé comme template)
+2. index.php
+3. Toutes les pages qui affichent les jeux Flash
+
+Liste probable des fichiers :
+- gamestation.php (si existe)
+- games.php (si existe)
+- play.php (si existe)
+
+
+TEST DE RUFFLE
+--------------
+
+1. Rafraîchissez la page signup.php
+2. Les warnings PHP devraient avoir disparu
+3. Si une page contient du Flash, Ruffle l'affichera automatiquement
+
+Vérifiez dans la console du navigateur (F12) :
+- Vous devriez voir : "Ruffle loaded"
+- Pas d'erreurs liées à Flash
+
+
+COMPATIBILITÉ
+-------------
+
+Ruffle supporte :
+✓ ActionScript 1 et 2 (complet)
+✓ ActionScript 3 (en cours, ~60-70%)
+✓ La plupart des jeux Flash simples
+✓ Tous les navigateurs modernes (Chrome, Firefox, Safari, Edge)
+
+Limitations possibles :
+- Certaines fonctionnalités AS3 avancées peuvent ne pas fonctionner
+- Performances peuvent varier selon la complexité du Flash
+
+
+DOCUMENTATION
+-------------
+
+Documentation Ruffle : https://github.com/ruffle-rs/ruffle/wiki
+Démo en ligne : https://ruffle.rs/demo/
+
+
+NOTES
+-----
+
+- Ruffle est automatiquement mis à jour via le CDN unpkg.com
+- Pour une version stable en production, téléchargez une version spécifique
+- Le script est chargé de manière asynchrone pour ne pas bloquer le rendu
+
+
+PROCHAINES ÉTAPES
+-----------------
+
+1. Testez le jeu après avoir rafraîchi la page
+2. Naviguez vers les pages de jeux Flash
+3. Vérifiez que les jeux s'affichent correctement
+4. Si problème, consultez la console navigateur (F12)

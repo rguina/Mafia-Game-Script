@@ -60,6 +60,9 @@ print <<<EOF
 <script type="text/javascript" src="js/scriptaculous.js?load=effects,builder"></script>
 <script type="text/javascript" src="js/lightbox.js"></script>-->
 
+<!-- Ruffle Flash Emulator - Remplace Adobe Flash Player -->
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
 </head>
 <body>
     <div id="pagecontainer">
