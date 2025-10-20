@@ -70,7 +70,7 @@ function anti_inject($campo)
 foreach($campo as $key => $val)
 {
 //remove words that contains syntax sql
-$val = preg_replace(sql_regcase("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"),"",$val);
+$val = preg_replace("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/i","",$val);
 
 //Remove empty spaces
 $val = trim($val);

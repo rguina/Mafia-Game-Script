@@ -153,6 +153,15 @@ if (!function_exists('eregi_replace')) {
     }
 }
 
+// PHP 8.x: sql_regcase() was removed in PHP 7.3
+if (!function_exists('sql_regcase')) {
+    function sql_regcase($string) {
+        // sql_regcase() made each character case-insensitive in regex
+        // We can simply return the string and use the 'i' flag in preg_match/preg_replace
+        return $string;
+    }
+}
+
 // Charger les settings depuis la base de données
 $set = array();
 if (isset($db) && $db->connection_id) {

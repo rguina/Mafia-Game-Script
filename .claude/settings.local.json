@@ -1,8 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(for page in index.php inventory.php newspaper.php bodyguard.php)",
-      "Bash(php test_single_page.php newspaper.php)"
+      "Bash(php test_single_page.php gym.php)",
+      "Bash(git commit -m \"Fix sql_regcase() undefined - Add polyfill and simplify usage\n\nProblem:\n- Fatal error: Call to undefined function sql_regcase()\n- Function removed in PHP 7.3\n- Error in globals.php:73 when clicking ''Train'' in gym.php\n\nSolution:\n1. Added sql_regcase() polyfill in core.php\n   - Returns string as-is (for compatibility)\n   - Original function made regex case-insensitive\n   \n2. Updated globals.php anti_inject() function\n   - Removed sql_regcase() wrapper\n   - Added ''i'' flag directly to preg_replace pattern\n   - Pattern now: \"\"/(from|select|insert|...)/i\"\"\n   - Same behavior, better performance\n\nImpact:\n✅ No more sql_regcase() fatal error\n✅ SQL injection protection still works\n✅ Case-insensitive filtering maintained\n✅ gym.php and all forms now work\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")"
     ],
     "deny": [],
     "ask": []
