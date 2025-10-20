@@ -40,6 +40,23 @@ $db->configure($_CONFIG['hostname'],
  $_CONFIG['persistent']);
 $db->connect();
 $c=$db->connection_id;
+
+// PHP 8.x: Créer des fonctions de compatibilité pour mysql_*
+if (!function_exists('mysql_real_escape_string')) {
+    function mysql_real_escape_string($string) {
+        global $db;
+        if (isset($db) && isset($db->connection_id)) {
+            return mysqli_real_escape_string($db->connection_id, $string);
+        }
+        return addslashes($string);
+    }
+}
+if (!function_exists('mysql_escape_string')) {
+    function mysql_escape_string($string) {
+        return mysql_real_escape_string($string);
+    }
+}
+
 $set=array();
 $settq=$db->query("SELECT * FROM settings");
 while($r=$db->fetch_row($settq))
