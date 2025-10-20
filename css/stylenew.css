@@ -29,12 +29,12 @@ color:#ffffff;
 
 select{
 font:normal 12px Tahoma;
-color:#5b5b5b;
+color:#ffffff;
 }
 
 textarea{
 font:normal 12px Tahoma;
-color:#5b5b5b;
+color:#ffffff;
 }
 
 li{
@@ -2847,6 +2847,7 @@ height:20px;
 background-color:#111;
 border:0px;
 padding:3px 0px 0px 6px;
+color:#ffffff;
 }
 
 .agreepart{
