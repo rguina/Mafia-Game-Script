@@ -33,7 +33,7 @@ foreach($_GET as $k => $v)
 }
 
 require "global_func.php";
-if($_SESSION['loggedin']==0) { header("Location: login.php");exit; }
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']==0) { header("Location: login.php");exit; }
 $userid=$_SESSION['userid'];
 require "header.php";
 
