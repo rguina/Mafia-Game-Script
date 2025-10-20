@@ -14,6 +14,10 @@
 |**************************************************************************************************
 | Copyright (c) 2010 Ravan Scripts . All rights reserved.
 |**************************************************************************************************/
+
+// Include core.php for PHP 8.x polyfills (ereg functions)
+require_once "core.php";
+
 //thx to http://www.phpit.net/code/valid-email/ for valid_email
 function valid_email($email) {
   // First, we check that there's one @ symbol, and that the lengths are right
