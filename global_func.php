@@ -18,10 +18,12 @@
 
 
 function Clean($Var) {
-if (get_magic_globals_gpc() == 1) {
+// PHP 8.x: get_magic_quotes_gpc was removed, check if function exists
+if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc() == 1) {
 $Var = stripslashes($Var);
 }
-$Var = mysql_real_escape_string(htmlentities($Var));
+// Use addslashes instead of mysql_real_escape_string (which needs DB connection)
+$Var = addslashes(htmlentities($Var));
 return $Var;
 }
 

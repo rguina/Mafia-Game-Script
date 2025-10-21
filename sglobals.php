@@ -1,4 +1,8 @@
-<?php    
+<?php
+// Force error display for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
 /**************************************************************************************************
 | Software Name        : Ravan Scripts Online Mafia Game
@@ -10,7 +14,7 @@
 | The source files are subject to the Ravan Scripts End-User License Agreement included in License Agreement.html
 | The files in the package must not be distributed in whole or significant part.
 | All code is copyrighted unless otherwise advised.
-| Do Not Remove Powered By Ravan Scripts without permission .         
+| Do Not Remove Powered By Ravan Scripts without permission .
 |**************************************************************************************************
 | Copyright (c) 2010 Ravan Scripts . All rights reserved.
 |**************************************************************************************************/
@@ -32,16 +36,19 @@ foreach($_GET as $k => $v)
 }
 }
 
-require "global_func.php";
+require_once "global_func.php";
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']==0) { header("Location: login.php");exit; }
 $userid=$_SESSION['userid'];
-require "header.php";
 
+// Load config and define MONO_ON BEFORE loading header.php
 include "config.php";
 include "language.php";
 global $_CONFIG;
 define("MONO_ON", 1);
-require "class/class_db_{$_CONFIG['driver']}.php";
+
+// Now load header.php (which needs MONO_ON and config)
+require "header.php";
+require_once "class/class_db_{$_CONFIG['driver']}.php";
 $db=new database;
 $db->configure($_CONFIG['hostname'],
  $_CONFIG['username'],

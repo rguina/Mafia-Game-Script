@@ -92,7 +92,7 @@ $_POST = anti_inject($_POST);
 
 
 
-require "global_func.php";
+require_once "global_func.php";
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']==0) {
     header("Location: login.php");
     exit;
@@ -103,7 +103,7 @@ include "config.php";
 include "language.php";
 global $_CONFIG;
 if (!defined('MONO_ON')) { define("MONO_ON", 1); }
-require "class/class_db_{$_CONFIG['driver']}.php";
+require_once "class/class_db_{$_CONFIG['driver']}.php";
 $db=new database;
 $db->configure($_CONFIG['hostname'],
  $_CONFIG['username'],
