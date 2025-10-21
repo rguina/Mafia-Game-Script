@@ -14,7 +14,7 @@ if (!function_exists('array_diff_key')) {
 		return $result;
 	}
 }
-if (!function_exists(array_fill_keys)) {
+if (!function_exists('array_fill_keys')) {
 	function array_fill_keys($keys, $value) {
 		return array_combine($keys,array_fill(0,count($keys),$value));
 	}
@@ -34,7 +34,7 @@ $gangdata=mysql_fetch_array($gq);
 
 //error_reporting(E_ALL);
 
-define('GANG_MODULE', true, true);
+define('GANG_MODULE', true);
 
 // gangID, gangNAME, gangDESC, gangPREF, gangSUFF, gangMONEY, gangCRYSTALS, gangRESPECT, gangPRESIDENT, gangVICEPRES, gangCAPACITY, gangCRIME, gangCHOURS, gangAMENT
 
