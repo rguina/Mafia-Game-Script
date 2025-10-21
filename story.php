@@ -251,7 +251,7 @@ die("<b><font color=red size=+1>$ipban</font></b></body></html>");
 }
 $year=date('Y');
 
-OUT;
+// OUT; // Orphaned heredoc marker - commented out for PHP 8.x compatibility
 
 include "lfooter.php";  
 

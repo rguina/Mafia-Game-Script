@@ -238,7 +238,7 @@ $year=date('Y');
 
 
 
-OUT;
+// OUT; // Orphaned heredoc marker - commented out for PHP 8.x compatibility
 
 include "lfooter.php";  
 
