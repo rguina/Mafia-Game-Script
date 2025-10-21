@@ -115,6 +115,15 @@ if (!function_exists('mysql_fetch_array')) {
     }
 }
 
+if (!function_exists('mysql_fetch_row')) {
+    function mysql_fetch_row($result) {
+        if ($result instanceof mysqli_result) {
+            return mysqli_fetch_row($result);
+        }
+        return false;
+    }
+}
+
 if (!function_exists('mysql_free_result')) {
     function mysql_free_result($result) {
         if ($result instanceof mysqli_result) {
