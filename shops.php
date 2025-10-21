@@ -16,7 +16,7 @@
 |**************************************************************************************************/
 
 include "globals.php";
-$_GET['shop'] = abs((int) $_GET['shop']);
+$_GET['shop'] = isset($_GET['shop']) ? abs((int) $_GET['shop']) : 0;
 if(!$_GET['shop'])
 {
 print "
