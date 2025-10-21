@@ -16,6 +16,10 @@
 |**************************************************************************************************/
 
 include "globals.php";
+// Set default PayPal email if not configured
+if (!isset($set['paypal']) || empty($set['paypal'])) {
+    $set['paypal'] = 'your-paypal@email.com'; // Change this in settings table
+}
 print <<<EOF
 
 

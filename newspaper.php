@@ -66,7 +66,7 @@ $q=mysql_query("SELECT user_level FROM users WHERE userid=$userid");
 $r=$db->fetch_row($q);
 if($r['user_level'] != 1)
 {
-if($_GET['action'] == "all")
+if(isset($_GET['action']) && $_GET['action'] == "all")
 {
 if($r['user_level'] != 1)
 {
@@ -75,7 +75,7 @@ print "Newspaper Ads All Cleared!
 <META HTTP-EQUIV=Refresh CONTENT='1;url=newspaper.php'>";
 }
 }
-else if($_GET['action'] == "npID")
+else if(isset($_GET['action']) && $_GET['action'] == "npID")
 {
 if($r['user_level'] != 1)
 {
