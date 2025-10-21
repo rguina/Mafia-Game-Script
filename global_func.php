@@ -358,7 +358,7 @@ function event_add($userid,$text,$connection=0)
 {
 global $db;
 $text=mysql_escape($text);
-$db->query("INSERT INTO events VALUES('',$userid,UNIX_TIMESTAMP(),0,'$text')");
+$db->query("INSERT INTO events VALUES(NULL,$userid,UNIX_TIMESTAMP(),0,'$text')");
 $db->query("UPDATE users SET new_events=new_events+1 WHERE userid={$userid}");
 return 1;
 }
