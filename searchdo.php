@@ -1,20 +1,20 @@
 <?php
 include "globals.php";
 
-$_POST['search'] = mysql_real_escape_string($_POST['search']);
-$_POST['save'] = mysql_real_escape_string($_POST['save']);
-$_POST['clear'] = mysql_real_escape_string($_POST['clear']);
+$_POST['search'] = isset($_POST['search']) ? mysql_real_escape_string($_POST['search']) : '';
+$_POST['save'] = isset($_POST['save']) ? mysql_real_escape_string($_POST['save']) : '';
+$_POST['clear'] = isset($_POST['clear']) ? mysql_real_escape_string($_POST['clear']) : '';
 
 if($_POST['search'])
 {
-$_POST['moneymin'] = abs(@intval($_POST['moneymin']));
-$_POST['daysmax'] = abs(@intval($_POST['daysmax']));
-$_POST['daysmin'] = abs(@intval($_POST['daysmin']));
-$_POST['levelmin'] = abs(@intval($_POST['levelmin']));
-$_POST['levelmax'] = abs(@intval($_POST['levelmax']));
-$_POST['id'] = mysql_real_escape_string($_POST['id']);
-$_POST['location'] = abs(@intval($_POST['location']));
-$_POST['name'] = mysql_real_escape_string($_POST['name']);
+$_POST['moneymin'] = abs(@intval(isset($_POST['moneymin']) ? $_POST['moneymin'] : 0));
+$_POST['daysmax'] = abs(@intval(isset($_POST['daysmax']) ? $_POST['daysmax'] : 0));
+$_POST['daysmin'] = abs(@intval(isset($_POST['daysmin']) ? $_POST['daysmin'] : 0));
+$_POST['levelmin'] = abs(@intval(isset($_POST['levelmin']) ? $_POST['levelmin'] : 0));
+$_POST['levelmax'] = abs(@intval(isset($_POST['levelmax']) ? $_POST['levelmax'] : 0));
+$_POST['id'] = isset($_POST['id']) ? mysql_real_escape_string($_POST['id']) : '';
+$_POST['location'] = abs(@intval(isset($_POST['location']) ? $_POST['location'] : 0));
+$_POST['name'] = isset($_POST['name']) ? mysql_real_escape_string($_POST['name']) : '';
 
 
 $levelmin_clause="WHERE level >= {$_POST['levelmin']}";
@@ -22,7 +22,7 @@ $levelmax_clause=" AND level <= {$_POST['levelmax']}";
 $id_clause=($_POST['id']) ? " AND userid LIKE('%{$_POST['id']}%')" : "";
 $name_clause=($_POST['name']) ? " AND username LIKE('%{$_POST['name']}%')" : "";
 $location_clause=($_POST['location']) ? " AND location LIKE('{$_POST['location']}')" : "";
-$online_clause=($_POST['online']) ? " AND laston >= unix_timestamp()" : "";
+$online_clause=(isset($_POST['online']) && $_POST['online']) ? " AND laston >= unix_timestamp()" : "";
 
 $daysmin_clause=($_POST['daysmin']) ? " AND daysold >= {$_POST['daysmin']}" : "";
 $daysmax_clause=($_POST['daysmax']) ? " AND daysold <= {$_POST['daysmax']}" : "";
