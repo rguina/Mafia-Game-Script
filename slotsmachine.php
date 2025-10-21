@@ -18,7 +18,7 @@
 include "globals.php";
 $tresder = (int) (rand(100,999));
 $maxbet=$ir['level']*250;
-$_GET['tresde']=abs((int) $_GET['tresde']);
+$_GET['tresde'] = isset($_GET['tresde']) ? abs((int) $_GET['tresde']);
 if(($_SESSION['tresde'] == $_GET['tresde']) || $_GET['tresde']<100)
 {
 die ("Error, you cannot refresh or go back on the slots, please use a side link to go somewhere else.<br />

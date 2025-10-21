@@ -54,42 +54,42 @@ exit;
 }  
 else
 
-if(!$_GET['to'])
+if(!isset($_GET['to']))
 {
     $city = sprintf
 (
         "SELECT * FROM cities WHERE cityid = '%u' ",
         abs(@intval($ir['location']))
 );
-        
+
         $c = $db->query($city);
-        
+
             $r = $db->fetch_row($c);
-    
+
 
 $cost=3000;
 $type=($_POST['traveltype']);
-if ($traveltype == Plane)
+if ($traveltype == 'Plane')
 {
 $rantime=($r['citytravtime']);
 $cost=$cost*8;
-$go=fly;
+$go='fly';
 //since the travel type is by plane then the cost would be higher but the travel time would be less significant.
 }
 else
-if ($traveltype == Train)
+if ($traveltype == 'Train')
 {
 $rantime=($r['citytravtime']*2);
 $cost=$cost*5;
-$go=ride;
+$go='ride';
 //since the travel type is by train then the cost would be less but the travel time would be a little longer.
 }
 else
-if ($traveltype == Automobile)
+if ($traveltype == 'Automobile')
 {
 $rantime=($r['citytravtime']*4);
 $cost=$cost;
-$go=drive;
+$go='drive';
 //since the travel type is by car then the cost would be normal cost but the travel time would be even greater than the other types.
 }
 
@@ -126,36 +126,36 @@ while($r=$db->fetch_row($citycheck))
 
  { 
      
-if ($traveltype == Plane)
+if ($traveltype == 'Plane')
 {
-$rs=($r['citytravtime']);    
+$rs=($r['citytravtime']);
 
 echo '
 <tr>
 <td>'.$r['cityname'].'</td>
 <td>'.$r['citydesc'].'</td>
-<td>'.$r['cityminlevel'].'</td>  
-<td>'.$rs.' min</td>  
+<td>'.$r['cityminlevel'].'</td>
+<td>'.$rs.' min</td>
 <td><a href="travel.php?action=travel&to='.$r['cityid'].'&type='.$type.'">Go</a></td></tr>';
 
 }
 
 else
-if ($traveltype == Train)
+if ($traveltype == 'Train')
 {
-$rs=($r['citytravtime']*2); 
+$rs=($r['citytravtime']*2);
 
 echo '
 <tr>
 <td>'.$r['cityname'].'</td>
 <td>'.$r['citydesc'].'</td>
-<td>'.$r['cityminlevel'].'</td>  
-<td>'.$rs.' min</td>  
+<td>'.$r['cityminlevel'].'</td>
+<td>'.$rs.' min</td>
 <td><a href="travel.php?action=travel&to='.$r['cityid'].'&type='.$type.'">Go</a></td></tr>';
 
 }
 else
-if ($traveltype == Automobile)
+if ($traveltype == 'Automobile')
 {
 $rs=($r['citytravtime']*4); 
 
@@ -250,21 +250,21 @@ $r=$db->fetch_row($q);
 
 $cost=3000;
 $type=($_GET['type']);
-if ($_GET['type'] == Plane)
+if ($_GET['type'] == 'Plane')
 {
 $rantime=($r['citytravtime']);
 $tcost=$cost*8;
 //since the travel type is by plane then the cost would be higher but the travel time would be less significant.
 }
 else
-if ($_GET['type'] == Train)
+if ($_GET['type'] == 'Train')
 {
 $rantime=($r['citytravtime']*2);
 $tcost=$cost*5;
 //since the travel type is by train then the cost would be less but the travel time would be a little longer.
 }
 else
-if ($_GET['type'] == Automobile)
+if ($_GET['type'] == 'Automobile')
 {
 $rantime=($r['citytravtime']*4);
 $tcost=$cost;

@@ -1,10 +1,10 @@
 <?php
 include"globals.php";
 
-if($ir[hospital]>0)
-die("You are in the hospital for {$ir[hospital]} minutes.");
-if($ir[jail]>0)
-die("You are in jail for {$ir[jail]} minutes.");
+if($ir['hospital']>0)
+die("You are in the hospital for {$ir['hospital']} minutes.");
+if($ir['jail']>0)
+die("You are in jail for {$ir['jail']} minutes.");
 
 if($_GET['id'])
 {

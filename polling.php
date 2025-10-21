@@ -26,7 +26,7 @@ print "
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br><br>
 ";
-$_POST['poll']=abs((int) $_POST['poll']);
+$_POST['poll'] = isset($_POST['poll']) ? abs((int) $_POST['poll']);
 $ir['voted']=unserialize($ir['voted']);
 if ( $_POST['choice'] && $_POST['poll'])
 {

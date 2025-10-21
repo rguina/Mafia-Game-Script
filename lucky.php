@@ -26,7 +26,7 @@ print "
 </div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div> 
 
 ";
-if($_GET['open'])
+if(isset($_GET['open']) && $_GET['open'])
 {
 if($ir['boxes_opened'] >= 5)
 {

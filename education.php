@@ -34,7 +34,7 @@ print "You are currently doing the {$coud['crNAME']}, you have {$ir['cdays']} da
 }
 else
 {
-if($_GET['cstart'])
+if(isset($_GET['cstart']) && $_GET['cstart'])
 {
 $_GET['cstart'] = abs((int) $_GET['cstart']);
 //Verify.

@@ -50,7 +50,7 @@ What would you like to spend your crystals on?<br />
 }
 else
 {
-if($_GET['spend'] == 'refill')
+if(isset($_GET['spend']) && $_GET['spend'] == 'refill')
 {
 if($ir['crystals'] <$set['ct_refillprice'])
 {
@@ -68,7 +68,7 @@ print "You have paid {$set['ct_refillprice']} crystals to refill your energy bar
 }  
 
 
-if($_GET['spend'] == 'rob')
+if(isset($_GET['spend']) && $_GET['spend'] == 'rob')
 {
 if($ir['crystals'] <200)
 {
@@ -83,7 +83,7 @@ print "You have paid 200 crystals for One Rob Skill";
 }
 }      
   
-else if($_GET['spend'] == 'IQ')
+else if(isset($_GET['spend']) && $_GET['spend'] == 'IQ')
 {
 print "
 
@@ -96,7 +96,7 @@ You have <b>{$ir['crystals']}</b> crystals.<br />
 One crystal = {$set['ct_iqpercrys']} IQ.<form action='crystaltemple.php?spend=IQ2' method='post'><input type='text' STYLE='color: black;  background-color: white;' name='crystals' /><br /><input type='submit' STYLE='color: black;  background-color: white;' value='Swap' /></form></div>
 <div><img src='images/generalinfo_btm.jpg' alt='' /></div><br> </div></div></div> </div> </div>";
 }
-else if($_GET['spend'] == 'IQ2')
+else if(isset($_GET['spend']) && $_GET['spend'] == 'IQ2')
 {
 $_POST['crystals']=(int) $_POST['crystals'];
 if($_POST['crystals'] <= 0 || $_POST['crystals'] > $ir['crystals'])
@@ -112,7 +112,7 @@ $db->query("UPDATE userstats SET IQ=IQ+$iqgain WHERE userid=$userid");
 print "You traded {$_POST['crystals']} crystals for $iqgain IQ.";
 }
 }
-else if($_GET['spend'] == 'money')
+else if(isset($_GET['spend']) && $_GET['spend'] == 'money')
 {
 print "<div class='icolumn2' id='mainContentDiv'>
 <div><img src='images/generalinfo_top.jpg' alt='' /></div>
@@ -121,7 +121,7 @@ You have <b>{$ir['crystals']}</b> crystals.<br />
 One crystal = \$".number_format($set['ct_moneypercrys']).".<form action='crystaltemple.php?spend=money2' method='post'><input type='text' STYLE='color: black;  background-color: white;' name='crystals' /><br /><input type='submit' STYLE='color: black;  background-color: white;' value='Swap' /></form></div>
 <div><img src='images/generalinfo_btm.jpg' alt='' /></div><br> </div></div></div> </div> </div>";
 }
-else if($_GET['spend'] == 'money2')
+else if(isset($_GET['spend']) && $_GET['spend'] == 'money2')
 {
 $_POST['crystals']=(int) $_POST['crystals'];
 if($_POST['crystals'] <= 0 || $_POST['crystals'] > $ir['crystals'])

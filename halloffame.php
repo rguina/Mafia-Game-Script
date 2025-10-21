@@ -20,7 +20,7 @@ $filters=array(
 'nodon' => 'AND donatordays=0',
 'don' => 'AND donatordays > 0',
 'all' => '');
-$filter=(isset($filters[$_GET['filter']])) ? $_GET['filter'] : 'all';
+$filter=(isset($filters[(isset($_GET['filter']) ? $_GET['filter'] : '')])) ? (isset($_GET['filter']) ? $_GET['filter'] : '') : 'all';
 $myf=$filters[$filter];
 $bt1=($filter=="nodon") ? "<b>" : "";
 $bet1=($filter=="nodon") ? "</b>" : "";
