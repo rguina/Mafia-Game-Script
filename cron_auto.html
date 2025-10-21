@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mafia Game - Cron Auto Runner</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #fff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .status {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .status-item.running { border-left-color: #2196F3; }
+        .status-name { font-weight: bold; font-size: 1.1em; }
+        .status-time { color: #aaa; font-size: 0.9em; }
+
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .badge-active { background: #4CAF50; color: white; }
+        .badge-running { background: #2196F3; color: white; }
+        .badge-stopped { background: #f44336; color: white; }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-start { background: #4CAF50; color: white; }
+        .btn-stop { background: #f44336; color: white; }
+        .btn-test { background: #2196F3; color: white; }
+
+        .logs {
+            background: #000;
+            padding: 20px;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .log-entry { margin: 5px 0; padding: 5px; }
+        .log-info { color: #2196F3; }
+        .log-success { color: #4CAF50; }
+        .log-error { color: #f44336; }
+        .log-warning { color: #ff9800; }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><® Mafia Game</h1>
+        <div class="subtitle">Cron Jobs Auto Runner</div>
+
+        <div class="status">
+            <div class="status-item" id="status-minute">
+                <div>
+                    <div class="status-name">ñ Cron Minute</div>
+                    <div class="status-time">Jail, Hospital, Travel, Bodyguard</div>
+                </div>
+                <span class="status-badge badge-stopped">Arrêté</span>
+            </div>
+
+            <div class="status-item" id="status-five">
+                <div>
+                    <div class="status-name">¡ Cron 5 Minutes</div>
+                    <div class="status-time">Energy, Will, Health, Brave</div>
+                </div>
+                <span class="status-badge badge-stopped">Arrêté</span>
+            </div>
+
+            <div class="status-item" id="status-hour">
+                <div>
+                    <div class="status-name">= Cron Hourly</div>
+                    <div class="status-time">Maintenance horaire</div>
+                </div>
+                <span class="status-badge badge-stopped">Arrêté</span>
+            </div>
+
+            <div class="status-item" id="status-day">
+                <div>
+                    <div class="status-name">< Cron Daily</div>
+                    <div class="status-time">Maintenance quotidienne</div>
+                </div>
+                <span class="status-badge badge-stopped">Arrêté</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn-start" onclick="startCrons()">¶ Démarrer Tous</button>
+            <button class="btn-stop" onclick="stopCrons()">ù Arrêter Tous</button>
+            <button class="btn-test" onclick="testCron()">>ê Test Minute</button>
+        </div>
+
+        <h3 style="margin-bottom: 15px;">=Ë Logs</h3>
+        <div class="logs" id="logs"></div>
+
+        <div class="footer">
+            Gardez cette page ouverte pour que les crons s'exécutent automatiquement
+        </div>
+    </div>
+
+    <script>
+        let intervals = { minute: null, five: null, hour: null, day: null };
+        let isRunning = false;
+
+        function addLog(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const now = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.textContent = `[${now}] ${message}`;
+            logs.insertBefore(entry, logs.firstChild);
+            while (logs.children.length > 50) {
+                logs.removeChild(logs.lastChild);
+            }
+        }
+
+        function updateStatus(cron, status) {
+            const element = document.getElementById(`status-${cron}`);
+            const badge = element.querySelector('.status-badge');
+            badge.className = 'status-badge';
+
+            if (status === 'running') {
+                badge.classList.add('badge-running');
+                badge.textContent = 'En cours...';
+                element.classList.add('running');
+            } else if (status === 'active') {
+                badge.classList.add('badge-active');
+                badge.textContent = 'Actif';
+                element.classList.remove('running');
+            } else {
+                badge.classList.add('badge-stopped');
+                badge.textContent = 'Arrêté';
+                element.classList.remove('running');
+            }
+        }
+
+        async function runCron(cronFile, cronName) {
+            try {
+                updateStatus(cronName, 'running');
+                const response = await fetch(cronFile, { method: 'GET', cache: 'no-cache' });
+
+                if (response.ok) {
+                    addLog(` ${cronFile} exécuté avec succès`, 'success');
+                    updateStatus(cronName, 'active');
+                    return true;
+                } else {
+                    addLog(`L Erreur ${cronFile}: ${response.status}`, 'error');
+                    updateStatus(cronName, 'active');
+                    return false;
+                }
+            } catch (error) {
+                addLog(`L Erreur ${cronFile}: ${error.message}`, 'error');
+                updateStatus(cronName, 'active');
+                return false;
+            }
+        }
+
+        function startCrons() {
+            if (isRunning) {
+                addLog('  Les crons sont déjà en cours', 'warning');
+                return;
+            }
+
+            isRunning = true;
+            addLog('=€ Démarrage de tous les crons...', 'info');
+
+            intervals.minute = setInterval(() => runCron('cron_run_minute.php', 'minute'), 60000);
+            intervals.five = setInterval(() => runCron('cron_run_five.php', 'five'), 300000);
+            intervals.hour = setInterval(() => runCron('cron_run_hour.php', 'hour'), 3600000);
+            intervals.day = setInterval(() => runCron('cron_run_day.php', 'day'), 86400000);
+
+            runCron('cron_run_minute.php', 'minute');
+            runCron('cron_run_five.php', 'five');
+
+            addLog(' Tous les crons sont actifs', 'success');
+        }
+
+        function stopCrons() {
+            if (!isRunning) {
+                addLog('  Les crons sont déjà arrêtés', 'warning');
+                return;
+            }
+
+            Object.keys(intervals).forEach(key => {
+                if (intervals[key]) {
+                    clearInterval(intervals[key]);
+                    intervals[key] = null;
+                    updateStatus(key, 'stopped');
+                }
+            });
+
+            isRunning = false;
+            addLog('ù Tous les crons ont été arrêtés', 'info');
+        }
+
+        function testCron() {
+            addLog('>ê Test du cron minute...', 'info');
+            runCron('cron_run_minute.php', 'minute');
+        }
+
+        window.addEventListener('load', () => {
+            addLog('=ñ Page chargée - Prêt à démarrer', 'info');
+            addLog('=¡ Cliquez sur "Démarrer Tous" pour activer les crons', 'info');
+        });
+
+        window.addEventListener('beforeunload', (e) => {
+            if (isRunning) {
+                e.preventDefault();
+                e.returnValue = 'Les crons vont s arrêter si vous fermez cette page';
+                return e.returnValue;
+            }
+        });
+    </script>
+</body>
+</html>
