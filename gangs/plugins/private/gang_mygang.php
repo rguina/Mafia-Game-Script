@@ -996,8 +996,8 @@ function ygang_summary() {
 		'pres' => 'N/A',
 		'vice' => 'N/A',
 	);
-	$q_get = sprintf('select userid, username, "pres" as rank from users where userid = %d
-		union select userid, username, "vice" as rank from users where userid = %d',
+	$q_get = sprintf('select userid, username, "pres" as `rank` from users where userid = %d
+		union select userid, username, "vice" as `rank` from users where userid = %d',
 		$gvars->data['gangPRESIDENT'], $gvars->data['gangVICEPRES']);
 	$q_get = mysql_query($q_get);
 	if ($q_get and mysql_num_rows($q_get) > 0) {
