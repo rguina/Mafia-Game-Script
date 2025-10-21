@@ -18,14 +18,14 @@
 include "globals.php";
 $tresder = (int) (rand(100,999));
 $maxbet=$ir['level']*250;
-$_GET['tresde'] = isset($_GET['tresde']) ? abs((int) $_GET['tresde']);
+$_GET['tresde'] = isset($_GET['tresde']) ? abs((int) $_GET['tresde']) : 0;
 if(($_SESSION['tresde'] == $_GET['tresde']) || $_GET['tresde']<100)
 {
 die ("Error, you cannot refresh or go back on the slots, please use a side link to go somewhere else.<br />
 <a href='slotsmachine.php?tresde=$tresder'>&gt; Back</a>");
 }
 $_SESSION['tresde']=$_GET['tresde'];
-$_GET['bet']=abs((int) $_GET['bet']);
+$_GET['bet'] = isset($_GET['bet']) ? abs((int) $_GET['bet']) : 0;
 print "
 
 <div class='generalinfo_txt'>

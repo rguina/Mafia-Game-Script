@@ -188,17 +188,9 @@ function travel()
 {
 global $db, $ir, $c, $h, $userid;
 $_GET['to'] = abs((int) $_GET['to']);
-$_GET['type'] = htmlentities(mysql_real_escape_string($_GET['type'])); 
-$cost = abs((int) $cost);
+$_GET['type'] = htmlentities(mysql_real_escape_string($_GET['type']));
 
-if($ir['money'] < $cost)
-{
-die ('<h2>ERROR</h2>
-You dont have enough money.');
-$h->endpage();
-exit;
-}
-else if( ((int) $_GET['to']) != $_GET['to'])
+if( ((int) $_GET['to']) != $_GET['to'])
 {
 die('<h2>ERROR</h2>
 Just where in the hell are you trying to go??');
@@ -219,22 +211,15 @@ else
         $citycheck2 = $db->query($check2);
         
         
-$q=$db->query("SELECT * FROM cities WHERE cityid = {$_GET['to']} AND cityminlevel <= {$ir['level']}");       
-        
-if($ir['money'] < $cost)
-{
-die ('<h2>ERROR</h2>
-You dont have enough money.');
-$h->endpage();
-exit;
-}
-else if( ((int) $_GET['to']) != $_GET['to'])
+$q=$db->query("SELECT * FROM cities WHERE cityid = {$_GET['to']} AND cityminlevel <= {$ir['level']}");
+
+if( ((int) $_GET['to']) != $_GET['to'])
 {
 die('<h2>ERROR</h2>
 Just where in the hell are you trying to go??');
 $h->endpage();
 exit;
-}               
+}
 
 else if(!$db->num_rows($q))
 {
