@@ -16,7 +16,7 @@
 |**************************************************************************************************/
 
 include "globals.php";
-if($_POST['report'])
+if(isset($_POST['report']) && $_POST['report'])
 {
 $_POST['player']=abs((int) $_POST['player']);
 $db->query("INSERT INTO preports VALUES('',$userid,{$_POST['player']},'{$_POST['report']}')");
@@ -35,9 +35,9 @@ print "
 
 Know of a player that's breaking the rules? Don't hesitate to report them. Reports are kept confidential.<br /><br />
 <form action='preport.php' method='post'>
-Player's ID: <input type='text' STYLE='color: black;  background-color: white;' name='player' value='{$_GET['ID']}' /><br /> <br />
+Player's ID: <input type='text' STYLE='color: black;  background-color: white;' name='player' value='".(isset($_GET['ID']) ? $_GET['ID'] : '')."' /><br /> <br />
 What they've done: <br /> <br />
-<textarea rows='7' cols='40' name='report'>{$_GET['report']}</textarea><br />
+<textarea rows='7' cols='40' name='report'>".(isset($_GET['report']) ? $_GET['report'] : '')."</textarea><br />
 <input type='submit' STYLE='color: black;  background-color: white;' value='Send Report' /></form></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";
 }
 $h->endpage();
