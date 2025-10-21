@@ -1,6 +1,7 @@
 <?php
 include_once ('globals.php');
-switch($_GET['page'])
+$page = isset($_GET['page']) ? $_GET['page'] : '';
+switch($page)
 {
 case 'signup': ladder_signup(); break;
 default: ladder_index(); break;
@@ -22,7 +23,8 @@ echo '
 
 <table width=80% cellspacing=1 class="table"><tr style="background: gray; "><th>ID</th> <th>Ladder Name</th> <th>Level Required</th> </tr> ';
 $fetch = $db->query("SELECT * FROM `battle_ladders` ORDER BY `ladderLevel` ASC");
-while ($r = $db->fetch_row($fetch)) 
+$count = 0; // Initialize counter
+while ($r = $db->fetch_row($fetch))
 {
 $count ++;
 echo ' <tr><td> '.$count.'. </td><td><a href="battle_ladder.php?id='.$r['ladderId'].'">'.stripslashes($r['ladderName']).'</a></td><td> '.$r['ladderLevel'].' ';

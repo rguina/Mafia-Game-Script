@@ -1,7 +1,8 @@
 <?php
-include_once (DIRNAME(__FILE__). '/globals.php');  
+include_once (DIRNAME(__FILE__). '/globals.php');
 
-switch ($_GET['page'])
+$page = isset($_GET['page']) ? $_GET['page'] : '';
+switch ($page)
 {
 case 'class': view_class(); break;
 case 'profile': view_profile(); break;

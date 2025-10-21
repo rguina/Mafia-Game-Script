@@ -57,7 +57,7 @@ print"
 <font color=white><u>Attack
 <u/></strong></u></div></td>
 </tr>";
-
+$cn = 0; // Initialize counter
 while($r=$db->fetch_row($q))
 {
 $la=time()-$r['laston'];

@@ -103,5 +103,5 @@ print "<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='ht
 <embed src='images/poker.swf' width=500 height=500 align='center' quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash'></embed>
 </object></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div><br><br><a href='gamestation.php'>Back to Game Station</a>";
 }
-$h->endpage
+$h->endpage();
 ?>

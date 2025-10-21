@@ -18,7 +18,7 @@
 include "globals.php";
 $mpq=$db->query("SELECT * FROM houses WHERE hWILL={$ir['maxwill']}");
 $mp=$db->fetch_row($mpq);
-$_GET['property']=abs((int) $_GET['property']);
+$_GET['property'] = isset($_GET['property']) ? abs((int) $_GET['property']) : 0;
 if($_GET['property'])
 {
 $npq=$db->query("SELECT * FROM houses WHERE hID={$_GET['property']}");
@@ -86,7 +86,7 @@ print "<a href='estate.php?sellhouse'><b>Sell Your House</b></a>
 
       
 ";  
-if($ir['willmax'] > 100)
+if(isset($ir['willmax']) && $ir['willmax'] > 100)
 {
 }
 $hq=$db->query("SELECT * FROM houses WHERE hWILL>{$ir['maxwill']} ORDER BY hWILL ASC");
@@ -122,7 +122,7 @@ print "
 <div class='city_con'>
 <div><img src='images/all_top.gif' alt='' /></div>
 <div class='city_md'>
-<div class='alltxt'>\$$t".money_formatter($r['hPRICE'],'')."</div>
+<div class='alltxt'>\$".money_formatter($r['hPRICE'],'')."</div>
 </div>
 <div><img src='images/all_btm.gif' alt='' /></div>                                                    
 </div>

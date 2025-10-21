@@ -25,8 +25,8 @@ die ("Error, you cannot refresh or go back on the slots, please use a side link 
 <a href='roulette.php?tresde=$tresder'>&gt; Back</a>");
 }
 $_SESSION['tresde']=$_GET['tresde'];
-$_GET['bet']=abs((int) $_GET['bet']);
-$_GET['number']=abs((int) $_GET['number']);
+$_GET['bet'] = isset($_GET['bet']) ? abs((int) $_GET['bet']) : 0;
+$_GET['number'] = isset($_GET['number']) ? abs((int) $_GET['number']) : 0;
 print "
 
 <div class='generalinfo_txt'>
