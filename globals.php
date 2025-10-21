@@ -186,6 +186,18 @@ if (!function_exists('mysql_fetch_row')) {
         return false;
     }
 }
+if (!function_exists('mysql_affected_rows')) {
+    function mysql_affected_rows($link = null) {
+        global $db;
+        if ($link !== null && $link instanceof mysqli) {
+            return mysqli_affected_rows($link);
+        }
+        if (isset($db) && isset($db->connection_id)) {
+            return mysqli_affected_rows($db->connection_id);
+        }
+        return 0;
+    }
+}
 if (!function_exists('mysql_free_result')) {
     function mysql_free_result($result) {
         if ($result instanceof mysqli_result) {
