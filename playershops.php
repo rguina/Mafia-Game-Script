@@ -6,7 +6,7 @@ die("You are in the hospital for {$ir['hospital']} minutes.");
 if($ir['jail']>0)
 die("You are in jail for {$ir['jail']} minutes.");
 
-if($_GET['id'])
+if(isset($_GET['id']) && $_GET['id'])
 {
 $shopid=mysql_real_escape_string($_GET['id']);
 $getshop=$db->query("select * from usershops where id=$shopid");

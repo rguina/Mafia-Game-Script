@@ -53,7 +53,7 @@ Keep Your name hidden? <br /><input name="hidden" value="0" checked="checked" ty
 function step2()
 {
 global $db, $ir, $h;
-$a=$db->query("SELECT `username`, `level`, `userid`, `hospital`, `jail` `bguard` FROM `users` WHERE `userid`= {$_POST['user']}");
+$a=$db->query("SELECT `username`, `level`, `userid`, `hospital`, `jail`, `bguard` FROM `users` WHERE `userid`= {$_POST['user']}");
 $bodyguard=$db->query("SELECT `bguard` FROM `users` WHERE `userid`= {$_POST['user']}");
 $protection=$db->fetch_row($bodyguard);
 

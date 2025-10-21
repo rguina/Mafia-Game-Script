@@ -1,13 +1,13 @@
 <?php
 
 include"globals.php";
-if($ir[hospital]>0)
+if($ir['hospital']>0)
 {
-die("You are in the hospital for {$ir[hospital]} minutes.");
+die("You are in the hospital for {$ir['hospital']} minutes.");
 }
-if($ir[jail]>0)
+if($ir['jail']>0)
 {
-die("You are in jail for {$ir[jail]} minutes.");
+die("You are in the hospital for {$ir['jail']} minutes.");
 }
 $getshops=$db->query("select * from usershops where userid=$userid");
 if(mysql_num_rows($getshops)!=0)
