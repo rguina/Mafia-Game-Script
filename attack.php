@@ -41,7 +41,7 @@ print "<center>Only the crazy attack when their unconscious.
 $h->endpage();
 exit;
 }
-else if ($_SESSION['attacklost'] == 1)
+else if (isset($_SESSION['attacklost']) && $_SESSION['attacklost'] == 1)
 {
 print "<center>Only the losers of all their EXP attack when they've already lost.
 <br><a href='index.php'>> Go Back <</a>";
@@ -84,7 +84,7 @@ $db->query("UPDATE users SET hp=0, hospital=hospital+$hospit, hospreason='Beaten
 exit;
 }
 
-if($_GET['nextstep'] > 100)
+if(isset($_GET['nextstep']) && $_GET['nextstep'] > 100)
 {
 print"<center><h2><font color='red'>STALEMATE!</h2>
 <a href='index.php'>> Go Back <</a></center>";
@@ -134,7 +134,7 @@ $ir['attacking']=0;
 $db->query("UPDATE users SET attacking=0 WHERE userid=$userid");
 exit;
 }
-else if($odata['travelling'])
+else if(isset($odata['travelling']) && $odata['travelling'])
 {
 print "<center>That player is travelling.
 <br><a href='index.php'>> Go Back <</a>";
