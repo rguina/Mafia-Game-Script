@@ -2,7 +2,7 @@
 include "globals.php";
 
 
-define('GANG_MODULE', true, true);
+define('GANG_MODULE', true);
 
 // gangID, gangNAME, gangDESC, gangPREF, gangSUFF, gangMONEY, gangCRYSTALS, gangRESPECT, gangPRESIDENT, gangVICEPRES, gangCAPACITY, gangCRIME, gangCHOURS, gangAMENT
 

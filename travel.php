@@ -3,7 +3,8 @@
 include "globals.php";
 include "travellingglobals.php";
 
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case "pickcity": pickcity(); break;
 case "travel": travel(); break;

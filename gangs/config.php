@@ -243,8 +243,8 @@ class GangVars {
 	 * @var array
 	 */
 	var $data;
-	
-	function GangVars() {
+
+	function __construct() {
 		global $userid, $ir, $c, $db, $gangdata;
 		$has_userid = false;
 		$has_db_con = false;
