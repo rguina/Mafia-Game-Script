@@ -83,7 +83,7 @@ print "Oh no, you're trying to add a ghost.";
 }
 else
 {
-$db->query("INSERT INTO contactlist VALUES('', $userid, {$_POST['ID']})");
+$db->query("INSERT INTO contactlist VALUES(NULL, $userid, {$_POST['ID']})");
 $r=$db->fetch_row($q);
 print "{$r['username']} was added to your contact list.<br /><br />
 <a href='contactlist.php'>Back</a>";

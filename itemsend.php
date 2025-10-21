@@ -100,7 +100,7 @@ You sent {$_GET['qty']} {$r['itmname']}(s) to {$rm['username']}
 
 ";
 event_add($_GET['user'],"You received {$_GET['qty']} {$r['itmname']}(s) from <a href='viewuser.php?u=$userid'>{$ir['username']}</a>",$c);
-$db->query("INSERT INTO itemxferlogs VALUES('',$userid,{$_GET['user']},{$r['itmid']},{$_GET['qty']},unix_timestamp(), '{$ir['lastip']}', '{$rm['lastip']}')");
+$db->query("INSERT INTO itemxferlogs VALUES(NULL,$userid,{$_GET['user']},{$r['itmid']},{$_GET['qty']},unix_timestamp(), '{$ir['lastip']}', '{$rm['lastip']}')");
 }
 }
 }

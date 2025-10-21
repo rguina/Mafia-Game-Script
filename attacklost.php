@@ -38,7 +38,7 @@ $db->query("UPDATE users SET exp=exp-$expgain, attacking=0 WHERE userid=$userid"
 $db->query("UPDATE users SET exp=0 WHERE exp<0");
 event_add($r['userid'],"<a href='viewuser.php?u=$userid'>{$ir['username']}</a> attacked you and lost.",$c);
 $atklog=mysql_escape_string($_SESSION['attacklog']);
-$db->query("INSERT INTO attacklogs VALUES('',$userid,{$_GET['ID']},'lost',unix_timestamp(),0,'$atklog');");
+$db->query("INSERT INTO attacklogs VALUES(NULL,$userid,{$_GET['ID']},'lost',unix_timestamp(),0,'$atklog');");
 $chk_one = $db->query(sprintf("SELECT * FROM `battle_members` WHERE `bmemberUser` = '%u'", $ir['userid']));
 $chk_two = $db->query(sprintf("SELECT * FROM `battle_members` WHERE `bmemberUser` = '%u'", $r['userid']));
    if (mysql_num_rows($chk_one) AND mysql_num_rows($chk_two))

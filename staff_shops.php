@@ -60,7 +60,7 @@ else
 {
 $sn=$_POST['sn'];
 $sd=$_POST['sd'];
-$db->query("INSERT INTO shops VALUES('',{$_POST['sl']},'$sn','$sd')");
+$db->query("INSERT INTO shops VALUES(NULL,{$_POST['sl']},'$sn','$sd')");
 print "The $sn Shop was successfully added to the game.";
 stafflog_add("Added Shop $sn");
 }
@@ -83,7 +83,7 @@ Item: ".item_dropdown($c,"item")."<br />
 function new_stock_submit()
 {
 global $db,$ir,$c,$h;
-$db->query("INSERT INTO shopitems VALUES('',{$_POST['shop']},{$_POST['item']})");
+$db->query("INSERT INTO shopitems VALUES(NULL,{$_POST['shop']},{$_POST['item']})");
 print "Item ID {$_POST['item']} was successfully added to shop ID {$_POST['shop']}";
 stafflog_add("Added Item ID {$_POST['item']} to shop ID {$_POST['shop']}");
 }

@@ -136,7 +136,7 @@ echo "<span style='color:red;font-weight:700;'>Unlucky!</span><br />While search
 }
 } else if($_GET['search'] == 2) {
 if($rand == 1) {
-$db->query("INSERT INTO `inventory` VALUES('',$itemidsearch2,$userid,$quantitysearch2)");
+$db->query("INSERT INTO `inventory` VALUES(NULL,$itemidsearch2,$userid,$quantitysearch2)");
 echo "<span style='color:green;font-weight:700;'>Success</span><br />While searching ".$cityname." you found an mysterious item. Go to your inventory to find out what";
 } else {
 $Time = mt_rand(2,30);
@@ -154,13 +154,13 @@ $db->query(sprintf("UPDATE `users` SET `hospital` = %u, `hospreason` = 'While se
 }
 } else if($_GET['search'] == 4) {
 if($randhard == 1) {
-$db->query("INSERT INTO inventory VALUES('',$itemidsearch4,$userid,$quantitysearch4)");
+$db->query("INSERT INTO inventory VALUES(NULL,$itemidsearch4,$userid,$quantitysearch4)");
 echo "<span style='color:green;font-weight:700;'>Success</span><br />While searching ".$cityname." you found an mysterious item. Go to your inventory to find out what";
 } else {
 echo "<span style='color:red;font-weight:700;'>Unlucky!</span><br />While searching ".$cityname." you found NOTHING!";
 }
 } else if($_GET['search'] == 5) {
-$db->query("INSERT INTO inventory VALUES('',$itemidsearch5,$userid,$quantitysearch5)");
+$db->query("INSERT INTO inventory VALUES(NULL,$itemidsearch5,$userid,$quantitysearch5)");
 echo "<span style='color:green;font-weight:700;'>Success</span><br />While searching ".$cityname." you found an mysterious item. Go to your inventory to find out what";
 } else if($_GET['search'] == 6) {
 if($rand == 1) {
@@ -173,7 +173,7 @@ $db->query(sprintf("UPDATE `users` SET `jail` = %u, `jail_reason` = 'Arrested fo
 }
 } else if($_GET['search'] == 7) {
 if($rand == 1) {
-$db->query("INSERT INTO inventory VALUES('',$itemidsearch7,$userid,$quantitysearch7)");
+$db->query("INSERT INTO inventory VALUES(NULL,$itemidsearch7,$userid,$quantitysearch7)");
 echo "<span style='color:green;font-weight:700;'>Success</span><br />While searching ".$cityname." You found an mysterious item. Go to your inventory to find out what";
 } else {
 $Time = mt_rand(2,30);
@@ -182,7 +182,7 @@ $db->query(sprintf("UPDATE `users` SET `jail` = %u, `jail_reason` = 'Arrested fo
 }
 } else if($_GET['search'] == 8) {
 if($randhard == 1) {
-$db->query("INSERT INTO inventory VALUES('',$itemidsearch8,$userid,$quantitysearch8)");
+$db->query("INSERT INTO inventory VALUES(NULL,$itemidsearch8,$userid,$quantitysearch8)");
 echo "<span style='color:green;font-weight:700;'>Success</span><br />While searching ".$cityname." You found an mysterious item. Go to your inventory to find out what";
 } else {
 $Time = mt_rand(2,30);

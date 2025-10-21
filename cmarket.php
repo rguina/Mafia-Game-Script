@@ -118,7 +118,7 @@ $h->endpage();
 exit;  
 }
 $tp=$_POST['amnt']*$_POST['price'];
-$db->query("INSERT INTO `crystalmarket` VALUES('',{$_POST['amnt']},$userid,$tp)");
+$db->query("INSERT INTO `crystalmarket` VALUES(NULL,{$_POST['amnt']},$userid,$tp)");
 $db->query("UPDATE `users` SET `crystals`=`crystals`-{$_POST['amnt']} WHERE `userid`=$userid");
 print "Crystals added to market!<br /><br /> 
 <a href='cmarket.php'>Back</a></div><div><img src='images/generalinfo_btm.jpg' alt='' /></div><br></div></div></div></div></div>";

@@ -40,9 +40,9 @@ function newjob()
 {
 global $db,$ir,$userid;
 if ( $_POST['jNAME']) {
-$db->query("INSERT INTO jobs VALUES('','{$_POST['jNAME']}', 0, '{$_POST['jDESC']}', '{$_POST['jOWNER']}')");
+$db->query("INSERT INTO jobs VALUES(NULL,'{$_POST['jNAME']}', 0, '{$_POST['jDESC']}', '{$_POST['jOWNER']}')");
 $i=$db->insert_id();
-$db->query("INSERT INTO jobranks VALUES('', '{$_POST['jrNAME']}', $i, {$_POST['jrPAY']}, {$_POST['jrIQG']}, {$_POST['jrLABOURG']}, {$_POST['jrSTRG']}, {$_POST['jrIQN']}, {$_POST['jrLABOURN']}, {$_POST['jrSTRN']})");
+$db->query("INSERT INTO jobranks VALUES(NULL, '{$_POST['jrNAME']}', $i, {$_POST['jrPAY']}, {$_POST['jrIQG']}, {$_POST['jrLABOURG']}, {$_POST['jrSTRG']}, {$_POST['jrIQN']}, {$_POST['jrLABOURN']}, {$_POST['jrSTRN']})");
 $j=$db->insert_id();
 $db->query("UPDATE jobs SET jFIRST=$j WHERE jID=$i");
 print "Job created!<br>
@@ -127,7 +127,7 @@ function newjobrank()
 {
 global $db,$ir,$userid;
 if ( $_POST['jrNAME']) {
-$db->query("INSERT INTO jobranks VALUES('', '{$_POST['jrNAME']}', {$_POST['jrJOB']}, {$_POST['jrPAY']}, {$_POST['jrIQG']}, {$_POST['jrLABOURG']}, {$_POST['jrSTRG']}, {$_POST['jrIQN']}, {$_POST['jrLABOURN']}, {$_POST['jrSTRN']})");
+$db->query("INSERT INTO jobranks VALUES(NULL, '{$_POST['jrNAME']}', {$_POST['jrJOB']}, {$_POST['jrPAY']}, {$_POST['jrIQG']}, {$_POST['jrLABOURG']}, {$_POST['jrSTRG']}, {$_POST['jrIQN']}, {$_POST['jrLABOURN']}, {$_POST['jrSTRN']})");
 print "Job rank created!<br>
 ";
 }

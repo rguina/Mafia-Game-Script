@@ -24,7 +24,7 @@ exit;
 }
 $posta=mysql_real_escape_string(print_r($_POST,1),$c);
 $geta=mysql_real_escape_string(print_r($_GET,1),$c);
-mysql_query("INSERT INTO seclogs VALUES('', $userid, '$posta', '$geta', unix_timestamp() )",$c);
+mysql_query("INSERT INTO seclogs VALUES(NULL, $userid, '$posta', '$geta', unix_timestamp() )",$c);
 switch($_GET['action'])
 {
 case 'giveitem': give_item_form(); break;
@@ -90,7 +90,7 @@ Quantity: <input type='text' STYLE='color: black;  background-color: white;' nam
 function give_item_submit()
 {
 global $ir,$c;
-mysql_query("INSERT INTO inventory VALUES('',{$_POST['item']},{$_POST['user']},{$_POST['qty']})",$c) or die(mysql_error());
+mysql_query("INSERT INTO inventory VALUES(NULL,{$_POST['item']},{$_POST['user']},{$_POST['qty']})",$c) or die(mysql_error());
 print "You gave {$_POST['qty']} of item ID {$_POST['item']} to user ID {$_POST['user']}";
 }
 function fed_user_form()
@@ -118,10 +118,10 @@ else
 $re=mysql_query("UPDATE users SET fedjail=1 WHERE userid={$_POST['user']}",$c);
 if(mysql_affected_rows($c))
 {
-mysql_query("INSERT INTO fedjail VALUES('',{$_POST['user']},{$_POST['days']},$userid,'".
+mysql_query("INSERT INTO fedjail VALUES(NULL,{$_POST['user']},{$_POST['days']},$userid,'".
 mysql_real_escape_string($_POST['reason'],$c)."')",$c);
 }
-mysql_query("INSERT INTO jaillogs VALUES('',$userid, {$_POST['user']}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())",$c);
+mysql_query("INSERT INTO jaillogs VALUES(NULL,$userid, {$_POST['user']}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())",$c);
 print "User jailed.";
 }
 }
@@ -139,7 +139,7 @@ function unfed_user_submit()
 global $ir,$c,$h,$userid;
 mysql_query("UPDATE users SET fedjail=0 WHERE userid={$_POST['user']}",$c);
 mysql_query("DELETE FROM fedjail WHERE fed_userid={$_POST['user']}",$c);
-mysql_query("INSERT INTO unjaillogs VALUES('',$userid, {$_POST['user']}, unix_timestamp())",$c);
+mysql_query("INSERT INTO unjaillogs VALUES(NULL,$userid, {$_POST['user']}, unix_timestamp())",$c);
 print "User unjailed.";
 }
 function mail_user_form()
@@ -276,10 +276,10 @@ else
 $re=mysql_query("UPDATE users SET fedjail=1 WHERE userid={$id}",$c);
 if(mysql_affected_rows($c))
 {
-mysql_query("INSERT INTO fedjail VALUES('',{$id},{$_POST['days']},$userid,'".
+mysql_query("INSERT INTO fedjail VALUES(NULL,{$id},{$_POST['days']},$userid,'".
 mysql_real_escape_string($_POST['reason'],$c)."')",$c);
 }
-mysql_query("INSERT INTO jaillogs VALUES('',$userid, {$id}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())",$c);
+mysql_query("INSERT INTO jaillogs VALUES(NULL,$userid, {$id}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())",$c);
 print "User jailed : $id.";
 }
 }

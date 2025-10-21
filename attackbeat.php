@@ -49,7 +49,7 @@ $hosptime=rand(50,150)+floor($ir['level']/2);
 $db->query("UPDATE users SET hp=1,hospital=$hosptime,hospreason='Hospitalized by <a href=\'viewuser.php?u={$userid}\'>{$ir['username']}</a>' WHERE userid={$r['userid']}");
 event_add($r['userid'],"<a href='viewuser.php?u=$userid'>{$ir['username']}</a> beat you up.",$c);
 $atklog=mysql_escape_string($_SESSION['attacklog']);
-$db->query("INSERT INTO attacklogs VALUES('',$userid,{$_GET['ID']},'won',unix_timestamp(),-1,'$atklog');");
+$db->query("INSERT INTO attacklogs VALUES(NULL,$userid,{$_GET['ID']},'won',unix_timestamp(),-1,'$atklog');");
 $_SESSION['attackwon']=0;
 $warq=$db->query("SELECT * FROM gangwars WHERE (warDECLARER={$ir['gang']} AND warDECLARED={$r['gang']}) OR (warDECLARED={$ir['gang']} AND warDECLARER={$r['gang']})");
 if ($db->num_rows($warq) > 0)

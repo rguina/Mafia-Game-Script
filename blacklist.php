@@ -100,7 +100,7 @@ print "Oh no, you're trying to add a ghost.</div><div><img src='images/generalin
 }
 else
 {
-$db->query("INSERT INTO blacklist VALUES('', $userid, {$_POST['ID']}, '{$_POST['comment']}')");
+$db->query("INSERT INTO blacklist VALUES(NULL, $userid, {$_POST['ID']}, '{$_POST['comment']}')");
 $r=$db->fetch_row($q);
 $db->query("UPDATE users SET enemy_count=enemy_count+1 WHERE userid={$_POST['ID']}");
 print "{$r['username']} was added to your black list.<br />

@@ -103,7 +103,7 @@ item_add($for, $set['willp_item'], 5);
 // process payment
 
 event_add($for, "Your \${$payment_amount} worth of Will Potions ($pack) has been successfully credited.", $c);
-$db->query("INSERT INTO willps_accepted VALUES('', {$buyer}, {$for}, '$pack', unix_timestamp(), '$txn_id')", $c);
+$db->query("INSERT INTO willps_accepted VALUES(NULL, {$buyer}, {$for}, '$pack', unix_timestamp(), '$txn_id')", $c);
 }
 else if (strcmp ($res, "INVALID") == 0) {
 fwrite($f,"Invalid?");

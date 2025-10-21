@@ -409,7 +409,7 @@ if($_POST['ref']) {
 require "global_func.php";
 $db->query("UPDATE users SET crystals=crystals+2 WHERE userid={$_POST['ref']}");
 event_add($_POST['ref'],"For refering $username to the game, you have earnt 2 valuable crystals!",$c);
-$db->query("INSERT INTO referals VALUES('', {$_POST['ref']}, $i, unix_timestamp(),'{$r['lastip']}','$IP')");
+$db->query("INSERT INTO referals VALUES(NULL, {$_POST['ref']}, $i, unix_timestamp(),'{$r['lastip']}','$IP')");
 }
 print "
 

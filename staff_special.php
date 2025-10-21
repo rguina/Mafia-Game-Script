@@ -205,7 +205,7 @@ else
 $q=$db->query("SELECT * FROM users WHERE user_level={$_POST['level']}");
 while($r=$db->fetch_row($q))
 {
-$db->query("INSERT INTO mail VALUES('', 0, 0, {$r['userid']}, unix_timestamp(),'$subj','{$_POST['text']}')");
+$db->query("INSERT INTO mail VALUES(NULL, 0, 0, {$r['userid']}, unix_timestamp(),'$subj','{$_POST['text']}')");
 print "Mass mail sent to {$r['username']}.<br />";
 }
 print "Mass mail sending complete!<br />

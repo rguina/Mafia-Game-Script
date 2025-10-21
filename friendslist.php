@@ -102,7 +102,7 @@ print "Oh no, you're trying to add a ghost.</div><div><img src='images/generalin
 }
 else
 {
-$db->query("INSERT INTO friendslist VALUES('', $userid, {$_POST['ID']}, '{$_POST['comment']}')");
+$db->query("INSERT INTO friendslist VALUES(NULL, $userid, {$_POST['ID']}, '{$_POST['comment']}')");
 $r=$db->fetch_row($q);
 $db->query("UPDATE users SET friend_count=friend_count+1 WHERE userid={$_POST['ID']}");
 print "{$r['username']} was added to your friends list.<br />

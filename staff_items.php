@@ -152,7 +152,7 @@ if($_POST['itmbuyable'] == 'on') { $itmbuy=1; } else { $itmbuy=0; }
 $efx1=$db->escape(serialize(array("stat" => $_POST['effect1stat'], "dir" => $_POST['effect1dir'], "inc_type" => $_POST['effect1type'], "inc_amount" => abs((int) $_POST['effect1amount']))));
 $efx2=$db->escape(serialize(array("stat" => $_POST['effect2stat'], "dir" => $_POST['effect2dir'], "inc_type" => $_POST['effect2type'], "inc_amount" => abs((int) $_POST['effect2amount']))));
 $efx3=$db->escape(serialize(array("stat" => $_POST['effect3stat'], "dir" => $_POST['effect3dir'], "inc_type" => $_POST['effect3type'], "inc_amount" => abs((int) $_POST['effect3amount']))));
-$m=$db->query("INSERT INTO items VALUES('',{$_POST['itmtype']},'$itmname','$itmdesc',{$_POST['itmbuyprice']},{$_POST['itmsellprice']},$itmbuy, '{$_POST['effect1on']}', '$efx1', '{$_POST['effect2on']}', '$efx2', '{$_POST['effect3on']}', '$efx3', $weapon, $armor)");
+$m=$db->query("INSERT INTO items VALUES(NULL,{$_POST['itmtype']},'$itmname','$itmdesc',{$_POST['itmbuyprice']},{$_POST['itmsellprice']},$itmbuy, '{$_POST['effect1on']}', '$efx1', '{$_POST['effect2on']}', '$efx2', '{$_POST['effect3on']}', '$efx3', $weapon, $armor)");
 print "The {$_POST['itmname']} Item was added to the game.";
 stafflog_add("Created item {$_POST['itmname']}");
 
@@ -185,7 +185,7 @@ if($ir['user_level'] > 3)
 {
 die("403");
 }
-$db->query("INSERT INTO inventory VALUES('',{$_POST['item']},{$_POST['user']},{$_POST['qty']})",$c) or die(mysql_error());
+$db->query("INSERT INTO inventory VALUES(NULL,{$_POST['item']},{$_POST['user']},{$_POST['qty']})",$c) or die(mysql_error());
 print "You gave {$_POST['qty']} of item ID {$_POST['item']} to user ID {$_POST['user']}";
 stafflog_add("Gave {$_POST['qty']} of item ID {$_POST['item']} to user ID {$_POST['user']}");
 }

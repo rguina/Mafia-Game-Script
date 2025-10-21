@@ -63,10 +63,10 @@ global $db,$ir,$c,$h,$userid;
 $re=$db->query("UPDATE users SET fedjail=1 WHERE userid={$_POST['user']}");
 if($db->affected_rows())
 {
-$db->query("INSERT INTO fedjail VALUES('',{$_POST['user']},{$_POST['days']},$userid,'".
+$db->query("INSERT INTO fedjail VALUES(NULL,{$_POST['user']},{$_POST['days']},$userid,'".
 $_POST['reason']."')");
 }
-$db->query("INSERT INTO jaillogs VALUES('',$userid, {$_POST['user']}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())");
+$db->query("INSERT INTO jaillogs VALUES(NULL,$userid, {$_POST['user']}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())");
 print "User jailed.";
 stafflog_add("Fedded ID {$_POST['user']} for {$_POST['days']}");
 }
@@ -92,10 +92,10 @@ function fed_edit_submit()
 global $db,$ir,$c,$h,$userid;
 
 $db->query("DELETE FROM fedjail WHERE fed_userid={$_POST['user']}");
-$db->query("INSERT INTO fedjail VALUES('',{$_POST['user']},{$_POST['days']},$userid,'".
+$db->query("INSERT INTO fedjail VALUES(NULL,{$_POST['user']},{$_POST['days']},$userid,'".
 $_POST['reason']."')");
 
-$db->query("INSERT INTO jaillogs VALUES('',$userid, {$_POST['user']}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())");
+$db->query("INSERT INTO jaillogs VALUES(NULL,$userid, {$_POST['user']}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())");
 print "User's sentence edited.";
 stafflog_add("Edited user ID {$_POST['user']}'s fedjail sentence");
 }
@@ -175,7 +175,7 @@ function unfed_user_submit()
 global $db,$ir,$c,$h,$userid;
 $db->query("UPDATE users SET fedjail=0 WHERE userid={$_POST['user']}");
 $db->query("DELETE FROM fedjail WHERE fed_userid={$_POST['user']}");
-$db->query("INSERT INTO unjaillogs VALUES('',$userid, {$_POST['user']}, unix_timestamp())");
+$db->query("INSERT INTO unjaillogs VALUES(NULL,$userid, {$_POST['user']}, unix_timestamp())");
 print "User unjailed.";
 stafflog_add("Unfedded user ID {$_POST['user']}");
 }
@@ -277,10 +277,10 @@ foreach($ids as $id)
 $re=$db->query("UPDATE users SET fedjail=1 WHERE userid={$id}");
 if($db->affected_rows())
 {
-$db->query("INSERT INTO fedjail VALUES('',{$id},{$_POST['days']},$userid,'".
+$db->query("INSERT INTO fedjail VALUES(NULL,{$id},{$_POST['days']},$userid,'".
 mysql_real_escape_string($_POST['reason'],$c)."')");
 }
-$db->query("INSERT INTO jaillogs VALUES('',$userid, {$id}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())");
+$db->query("INSERT INTO jaillogs VALUES(NULL,$userid, {$id}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())");
 print "User jailed : $id.";
 
 }

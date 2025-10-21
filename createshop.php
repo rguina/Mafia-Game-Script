@@ -39,7 +39,7 @@ $name=mysql_real_escape_string($_POST['name']);
 $description=mysql_real_escape_string($_POST['description']);
 $image=mysql_real_escape_string($_POST['image']);
 
-$db->query("INSERT INTO usershops VALUES('','$userid','$name','$description','$image','5','0','0')") or die(mysql_error());
+$db->query("INSERT INTO usershops VALUES(NULL,'$userid','$name','$description','$image','5','0','0')") or die(mysql_error());
 $i=mysql_insert_id($c);
 $db->query("update users set money=money-$shopcost where userid=$userid");
 print "You have successfully created your own shop!<br><a href='myshop.php'>Click here to manage your shop</a>";

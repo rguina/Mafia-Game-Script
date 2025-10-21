@@ -90,7 +90,7 @@ $ev=substr($ev,1);
 if ($upd) {
 $db->query("UPDATE users u LEFT JOIN userstats us ON u.userid=us.userid SET us.userid=us.userid $upd WHERE u.userid=$userid");
 }
-$db->query("INSERT INTO events VALUES('',$userid,unix_timestamp(),0,'Congratulations, you completed the {$coud['crNAME']} and gained $ev!')");
+$db->query("INSERT INTO events VALUES(NULL,$userid,unix_timestamp(),0,'Congratulations, you completed the {$coud['crNAME']} and gained $ev!')");
 }
 $db->query("UPDATE users SET course=0 WHERE cdays=0");
 $db->query("TRUNCATE TABLE votes;");

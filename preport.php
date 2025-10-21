@@ -19,7 +19,7 @@ include "globals.php";
 if(isset($_POST['report']) && $_POST['report'])
 {
 $_POST['player']=abs((int) $_POST['player']);
-$db->query("INSERT INTO preports VALUES('',$userid,{$_POST['player']},'{$_POST['report']}')");
+$db->query("INSERT INTO preports VALUES(NULL,$userid,{$_POST['player']},'{$_POST['report']}')");
 print "Report processed!";
 }
 else

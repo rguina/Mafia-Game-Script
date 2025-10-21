@@ -30,10 +30,10 @@ if($them['user_level'] == 2 || $them['user_level'] == 3 || $them['user_level'] =
 die("You cannot jail fellow staff.");
 }
 $db->query("UPDATE users SET fedjail=1 WHERE userid={$_POST['user']}");
-$db->query("INSERT INTO fedjail VALUES('',{$_POST['user']},{$_POST['days']},$userid,'".
+$db->query("INSERT INTO fedjail VALUES(NULL,{$_POST['user']},{$_POST['days']},$userid,'".
 mysql_real_escape_string($_POST['reason'],$c)."')");
 print "User jailed.";
-$db->query("INSERT INTO jaillogs VALUES('',$userid, {$_POST['user']}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())");
+$db->query("INSERT INTO jaillogs VALUES(NULL,$userid, {$_POST['user']}, {$_POST['days']}, '{$_POST['reason']}',unix_timestamp())");
 }
 else
 {

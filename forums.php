@@ -401,7 +401,7 @@ $u = "<font color=red>{$ir['username']}</font>";
 } 
 $u=mysql_escape($u);
 
-$db->query("INSERT INTO forum_posts VALUES('', {$_GET['reply']}, {$forum['ff_id']}, $userid, '$u', unix_timestamp(), '{$_POST['fp_subject']}', '{$_POST['fp_text']}', 0, '', 0, 0)") or die(mysql_error());
+$db->query("INSERT INTO forum_posts VALUES(NULL, {$_GET['reply']}, {$forum['ff_id']}, $userid, '$u', unix_timestamp(), '{$_POST['fp_subject']}', '{$_POST['fp_text']}', 0, '', 0, 0)") or die(mysql_error());
 $db->query("UPDATE forum_topics SET ft_last_id=$userid, ft_last_name='$u', ft_last_time=unix_timestamp(), ft_posts=ft_posts+1 WHERE ft_id={$_GET['reply']}");
 $db->query("UPDATE forum_forums SET ff_lp_time=unix_timestamp(), ff_posts=ff_posts+1, ff_lp_poster_id=$userid, ff_lp_poster_name='$u', ff_lp_t_id={$_GET['reply']}, ff_lp_t_name='{$topic['ft_name']}' WHERE ff_id={$forum['ff_id']}");
 $db->query("UPDATE users SET posts=posts+1 WHERE userid=$userid");
@@ -479,9 +479,9 @@ $u = "<font color=red>{$ir['username']}</font>";
 } 
 $u=mysql_escape($u);
 
-$db->query("INSERT INTO forum_topics VALUES('', {$_GET['forum']}, '{$_POST['ft_name']}', '{$_POST['ft_desc']}', 0, $userid, '$u', unix_timestamp(), 0, '', 0, 0, 0)");
+$db->query("INSERT INTO forum_topics VALUES(NULL, {$_GET['forum']}, '{$_POST['ft_name']}', '{$_POST['ft_desc']}', 0, $userid, '$u', unix_timestamp(), 0, '', 0, 0, 0)");
 $i=$db->insert_id();
-$db->query("INSERT INTO forum_posts VALUES('', {$i}, {$r['ff_id']}, $userid, '$u', unix_timestamp(), '{$_POST['ft_desc']}', '{$_POST['fp_text']}', 0, '', 0, 0)") or die(mysql_error());
+$db->query("INSERT INTO forum_posts VALUES(NULL, {$i}, {$r['ff_id']}, $userid, '$u', unix_timestamp(), '{$_POST['ft_desc']}', '{$_POST['fp_text']}', 0, '', 0, 0)") or die(mysql_error());
 $db->query("UPDATE forum_topics SET ft_last_id=$userid, ft_last_name='$u', ft_last_time=unix_timestamp(), ft_posts=ft_posts+1 WHERE ft_id={$i}");
 $db->query("UPDATE forum_forums SET ff_lp_time=unix_timestamp(), ff_posts=ff_posts+1, ff_topics=ff_topics+1, ff_lp_poster_id=$userid, ff_lp_poster_name='$u', ff_lp_t_id={$i}, ff_lp_t_name='{$_POST['ft_name']}' WHERE ff_id={$r['ff_id']}");
 $db->query("UPDATE users SET posts=posts+1 WHERE userid=$userid");

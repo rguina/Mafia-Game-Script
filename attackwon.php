@@ -51,7 +51,7 @@ $db->query("UPDATE users SET exp=exp+$expgain,money=money+$stole WHERE userid=$u
 $db->query("UPDATE users SET hp=1,money=money-$stole,hospital=$hosptime,hospreason='Mugged by <a href=\'viewuser.php?u={$userid}\'>{$ir['username']}</a>' WHERE userid={$r['userid']}");
 event_add($r['userid'],"<a href='viewuser.php?u=$userid'>{$ir['username']}</a> mugged you and stole \$$stole.",$c);
 $atklog=mysql_escape_string($_SESSION['attacklog']);
-$db->query("INSERT INTO attacklogs VALUES('',$userid,{$_GET['ID']},'won',unix_timestamp(),$stole,'$atklog');");
+$db->query("INSERT INTO attacklogs VALUES(NULL,$userid,{$_GET['ID']},'won',unix_timestamp(),$stole,'$atklog');");
 $chk_one = $db->query(sprintf("SELECT * FROM `battle_members` WHERE `bmemberUser` = '%u'", $ir['userid']));
 $chk_two = $db->query(sprintf("SELECT * FROM `battle_members` WHERE `bmemberUser` = '%u'", $r['userid']));
    if (mysql_num_rows($chk_one) AND mysql_num_rows($chk_two))

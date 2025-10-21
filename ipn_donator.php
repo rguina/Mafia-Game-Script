@@ -126,7 +126,7 @@ $t="tendollars";
 // process payment
 event_add($for, "Your \${$payment_amount} Pack {$pack} Donator Pack has been successfully credited to you.", $c);
 
-$db->query("INSERT INTO dps_accepted VALUES('', {$buyer}, {$for}, '$t', unix_timestamp(), '$txn_id')");
+$db->query("INSERT INTO dps_accepted VALUES(NULL, {$buyer}, {$for}, '$t', unix_timestamp(), '$txn_id')");
 }
 else if (strcmp ($res, "INVALID") == 0) {
 }

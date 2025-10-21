@@ -57,7 +57,7 @@ if (strlen($desc)== 0)
     exit;
 }
 
-$sql = sprintf("INSERT INTO gangs VALUES('', '%s', '%s', '%s', 0, 0, 0, 100, '%u', '%u', 5, 0, 0, 'Welcome')", $name, $desc, $first, $userid, $userid);
+$sql = sprintf("INSERT INTO gangs VALUES(NULL, '%s', '%s', '%s', 0, 0, 0, 100, '%u', '%u', 5, 0, 0, 'Welcome')", $name, $desc, $first, $userid, $userid);
 $db->query($sql);
 $i=$db->insert_id();
 $query=sprintf("UPDATE users SET gang=$i,money=money-500000 where userid=$userid");
