@@ -17,7 +17,8 @@ if($ir['user_level'] > 2)
 $_GET['action'] = isset($_GET['action']) ? $_GET['action'] : 'list';
 $_POST['cron_id'] = isset($_POST['cron_id']) ? (int)$_POST['cron_id'] : 0;
 
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
     case 'list': listCrons(); break;
     case 'toggle': toggleCron(); break;

@@ -21,7 +21,8 @@ if($ir['user_level'] > 2)
 die("403");
 }
 //This contains punishment stuffs
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'editnews': newspaper_form(); break;
 case 'subnews': newspaper_submit(); break;

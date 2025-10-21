@@ -25,7 +25,8 @@ exit;
 $posta=mysql_real_escape_string(print_r($_POST,1),$c);
 $geta=mysql_real_escape_string(print_r($_GET,1),$c);
 mysql_query("INSERT INTO seclogs VALUES(NULL, $userid, '$posta', '$geta', unix_timestamp() )",$c);
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'giveitem': give_item_form(); break;
 case 'giveitemsub': give_item_submit(); break;

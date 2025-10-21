@@ -28,7 +28,8 @@ echo "
 
 if($ir['bankmoney']>-1) 
 {
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'Withdraw': withdraw(); break;
 case 'Deposit': deposit(); break;

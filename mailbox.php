@@ -41,7 +41,8 @@ print "
 
 
 ";
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'inbox':
 mail_inbox();
@@ -89,7 +90,7 @@ Only the last 25 messages sent to you are visible.<br><br />
 <td class="h" width="30%">From</td>
 <td class="h" width="70%">Subject/Message</td>
 </tr>
-OUT;
+// OUT; // Orphaned heredoc marker - commented out for PHP 8 compatibility
 $q=$db->query("SELECT m.*,u.* FROM mail m LEFT JOIN users u ON m.mail_from=u.userid WHERE m.mail_to=$userid ORDER BY mail_time DESC LIMIT 25");
 while($r=$db->fetch_row($q))
 {

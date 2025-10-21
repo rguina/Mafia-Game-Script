@@ -18,7 +18,8 @@
 include "sglobals.php";
 
 //This contains punishment stuffs
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'fedform': fed_user_form(); break;
 case 'fedsub': fed_user_submit(); break;

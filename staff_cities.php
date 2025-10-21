@@ -5,7 +5,8 @@ if($ir['user_level'] > 2)
 die("403");
 }
 //This contains city stuffs
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case "addcity": addcity(); break;
 case "editcity": editcity(); break;

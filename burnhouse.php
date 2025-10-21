@@ -12,7 +12,8 @@ if($ir['jail'] or $ir['hospital'])
 }
     
 
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
     case 'search': search(); break;
     case 'searchsub': search_sub(); break;

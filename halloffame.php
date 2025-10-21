@@ -40,7 +40,8 @@ print "
 Filter: [$bt1<a href='halloffame.php?action={$_GET['action']}&filter=nodon'>Non-Donators</a>$bet1 | $bt2<a href='halloffame.php?action={$_GET['action']}&filter=don'>Donators</a>$bet2 | $bt3<a href='halloffame.php?action={$_GET['action']}&filter=all'>All Users</a>$bet3]  
 <table width=75% cellspacing=1 class='table'> <tr> <td><a href='halloffame.php?action=level&filter={$filter}'>LEVEL</a></td> <td><a href='halloffame.php?action=money&filter={$filter}'>MONEY</a></td> <td><a href='halloffame.php?action=respect&filter={$filter}'>RESPECT</a></td> <td><a href='halloffame.php?action=crystals&filter={$filter}'>CRYSTALS</a></td> <td><a href='halloffame.php?action=total&filter={$filter}'>TOTAL STATS</a></td> </tr>
 <tr> <td><a href='halloffame.php?action=strength&filter={$filter}'>STRENGTH</a></td> <td><a href='halloffame.php?action=agility&filter={$filter}'>AGILITY</a></td> <td><a href='halloffame.php?action=guard&filter={$filter}'>GUARD</a></td> <td><a href='halloffame.php?action=labour&filter={$filter}'>LABOUR</a></td> <td><a href='halloffame.php?action=iq&filter={$filter}'>IQ</a></td> </tr> </table>";
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case "level":
 hof_level();

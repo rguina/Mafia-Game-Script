@@ -21,7 +21,8 @@ if($ir['user_level'] > 2)
 die("403");
 }
 //This contains battletent stuffs
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case "addbot": addbot(); break;
 case "editbot": editbot(); break;

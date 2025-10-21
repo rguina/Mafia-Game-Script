@@ -21,7 +21,8 @@ if($ir['user_level'] > 2)
 die("403");
 }
 //This contains course stuffs
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'newcrime': new_crime_form(); break;
 case 'newcrimesub': new_crime_submit(); break; 

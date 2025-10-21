@@ -17,7 +17,8 @@
 
 include_once (DIRNAME(__FILE__) . '/globals.php');
 $_GET['action'] = isset($_GET['action']) && ctype_alpha($_GET['action']) ? trim($_GET['action']) : 'index';
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'banned': fedded(); break;
 case 'forum': forum_banned(); break;

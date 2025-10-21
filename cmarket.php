@@ -23,7 +23,8 @@ print "<div class='generalinfo_txt'>
 <div><img src='images/info_right.jpg' alt='' /></div> </div>
 <div class='generalinfo_simple'><br> <br><br>";
 $_GET['action'] = isset($_GET['action']) && is_string($_GET['action']) ? strtolower(trim($_GET['action'])) : "";
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case "buy":
 crystal_buy();

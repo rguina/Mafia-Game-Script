@@ -31,7 +31,8 @@ print "
 
 
 ";
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case "add":
 add_friend();

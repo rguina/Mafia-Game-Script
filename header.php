@@ -317,7 +317,7 @@ print <<<OUT
 </div>    
 
 <!-- Links -->
-OUT;
+// OUT; // Orphaned heredoc marker - commented out for PHP 8 compatibility
 }
 function menuarea()
 {

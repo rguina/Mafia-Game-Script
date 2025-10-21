@@ -2,7 +2,8 @@
 include "globals.php";
 
 
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'play1': play_slots1(); break;
 case 'play2': play_slots2(); break;

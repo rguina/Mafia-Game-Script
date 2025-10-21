@@ -21,7 +21,8 @@ if($ir['user_level'] > 2)
 die("403");
 }
 //This contains forum stuffs
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case "addforum": addcity(); break;
 case "editforum": editcity(); break;

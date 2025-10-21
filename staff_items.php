@@ -1,7 +1,8 @@
 <?php
 include "sglobals.php";
 //This contains item stuffs
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'newitem': new_item_form(); break;
 case 'newitemsub': new_item_submit(); break;

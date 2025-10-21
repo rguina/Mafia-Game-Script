@@ -24,7 +24,8 @@ die("403");
 // Initialize $_GET['action'] to avoid undefined key warning
 $_GET['action'] = isset($_GET['action']) ? $_GET['action'] : '';
 
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'newjob': newjob(); break;
 case 'jobedit': jobedit(); break;

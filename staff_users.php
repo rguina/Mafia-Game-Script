@@ -17,7 +17,8 @@
 
 include "sglobals.php";
 //This contains user stuffs
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'newuser': new_user_form(); break;
 case 'newusersub': new_user_submit(); break;

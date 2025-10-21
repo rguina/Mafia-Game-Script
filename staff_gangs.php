@@ -17,7 +17,8 @@
 
 include "sglobals.php";
 //This contains gang stuffs
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'grecord': admin_gang_record(); break;
 case 'gcredit': admin_gang_credit(); break;

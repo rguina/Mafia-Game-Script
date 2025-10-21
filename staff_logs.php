@@ -17,7 +17,8 @@
 
 include "sglobals.php";
 //This contains item stuffs
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case 'atklogs': view_attack_logs(); break;
 case 'itmlogs': view_itm_logs(); break;

@@ -30,7 +30,8 @@ print "
 <div class='generalinfo_simple'><br> <br><br>
 
 ";
-switch($_GET['action'])
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+switch($action)
 {
 case "add":
 add_enemy();
