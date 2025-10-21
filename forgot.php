@@ -470,7 +470,7 @@ $fems $fem</div> <br /></td></tr>
 <!--  Do Not Remove Powered By Mafia Game Scripts without permission .
 
 However, if you would like to use the script without the powered by links you may do so by purchasing a Copyright removal license for a very low fee.   -->
-// OUT; // Orphaned heredoc marker - commented out for PHP 8 compatibility
+OUT;
 include "lfooter.php"; 
 
 

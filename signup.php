@@ -487,7 +487,7 @@ print <<<OUT
 However, if you would like to use the script without the powered by links you may do so by purchasing a Copyright removal license for a very low fee.   -->
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-// OUT; // Orphaned heredoc marker - commented out for PHP 8 compatibility
+OUT;
 include "lfooter.php";  
 
 
