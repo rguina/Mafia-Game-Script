@@ -16,14 +16,14 @@
 |**************************************************************************************************/
 
 include "globals.php";
-$_GET['delete'] = abs((int) $_GET['delete']);
+$_GET['delete'] = isset($_GET['delete']) ? abs((int) $_GET['delete']) : 0;
 if($_GET['delete'])
 {
 $db->query("DELETE FROM events WHERE evID={$_GET['delete']} AND evUSER=$userid");
 print "<b>Event Deleted</b><br><br />";
 }
 
-if($_GET['delall'])
+if(isset($_GET['delall']) && $_GET['delall'])
 {
 print "
 
@@ -40,7 +40,7 @@ There is <font color='red'><b>NO</b></font> undo, so be sure.<br> <br>
 $h->endpage();
 exit;
 }
-if($_GET['delall2'])
+if(isset($_GET['delall2']) && $_GET['delall2'])
 {
     
 $am=$db->num_rows($db->query("SELECT * FROM events WHERE evUSER=$userid"));
